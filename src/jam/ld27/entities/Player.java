@@ -24,13 +24,13 @@ public class Player extends Entity {
     private byte direccion = 0;
             
     //Movement
-    private double velX = 0.8;
-    private double velY = 0.2;
+    private double velX = 4;
+    private double velY = 0.098;
     
     //Gravity mode
     private boolean gravityActive = true;
-    private double g = .001;
-    private double maxVelY = 1;
+    private double g = .01;
+    private double maxVelY = 5;
     
     //Graphics
     private int frame = 30;
@@ -58,14 +58,14 @@ public class Player extends Entity {
             if(velY >= maxVelY) {
                 velY = maxVelY;
             } else {
-                velY += velY*delta*g;
+                velY += velY*g;
             }
         }
         //Applying movement to character:
         movement(gc, delta);
         //Velocity of the character:
-        y += velY*delta;
-        x += direccion*velX*delta;
+        y += velY;
+        x += direccion*velX;
         //Setting the character:
         this.setPosition(new Vector2f(x,y));
     }
