@@ -4,6 +4,7 @@ import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
 import infinitedog.frisky.gui.Button;
 import jam.ld27.entities.CrossHair;
+import jam.ld27.game.C;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
