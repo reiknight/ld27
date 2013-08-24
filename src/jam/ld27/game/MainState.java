@@ -111,6 +111,7 @@ public class MainState extends ManagedGameState {
         // Load tilemap
         tileMap = new TileMap(C.Textures.TILE_SET.name, 32);
         tileMap.setMap(testMap);
+        tileMap.centerCameraOn(0, 0);
         
         restart();
     }

@@ -5,6 +5,7 @@
 package jam.ld27.tilemap;
 
 import infinitedog.frisky.textures.TextureManager;
+import jam.ld27.game.C;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -49,7 +50,11 @@ public class TileMap {
     }
     
     public void update(GameContainer gc, int delta) {
-        cameraOffsetX += 32 * ((float) delta / 1000);
-        cameraOffsetY += 32 * ((float) delta / 1000);
+        
+    }
+    
+    public void centerCameraOn(float x, float y) {
+        cameraOffsetX = x - C.SCREEN_WIDTH / 2;
+        cameraOffsetY = y - C.SCREEN_HEIGHT / 2;
     }
 }
