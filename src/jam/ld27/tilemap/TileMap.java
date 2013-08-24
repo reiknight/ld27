@@ -80,4 +80,8 @@ public class TileMap {
     public int getY() {
         return posY;
     }
+    
+    public int getTileSize() {
+        return tileSize;
+    }
 }

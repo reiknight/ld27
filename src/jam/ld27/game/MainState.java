@@ -1,9 +1,14 @@
 package jam.ld27.game;
  
+import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
+import jam.ld27.entities.Enemy;
 import jam.ld27.entities.Player;
 import jam.ld27.tilemap.TileMap;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -15,6 +20,7 @@ public class MainState extends ManagedGameState {
     private Player player;
     private TileMap tileMap;
     private Camera camera;
+    private int nEnemies = 10;
     
     public MainState(int stateID)
     {
@@ -35,13 +41,19 @@ public class MainState extends ManagedGameState {
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
         camera = new Camera();
-        
+        tileMap = new TileMap(60, 30, C.Textures.TILE_SET.name, 32);
+
         player = new Player();
         camera.follow(player);
         
         em.addEntity(C.Entities.PLAYER.name, player);
         
-        tileMap = new TileMap(60, 30, C.Textures.TILE_SET.name, 32);
+        int i;
+        for (i = 0; i < nEnemies; i += 1) {
+            float x = new Random().nextFloat() * tileMap.getWidth() - tileMap.getTileSize();
+            float y = new Random().nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
+            em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
+        }
         
         restart();
     }
@@ -59,6 +71,8 @@ public class MainState extends ManagedGameState {
         em.setGameState(C.States.MAIN_STATE.name);
         evm.update(gc, delta);
         camera.update(gc, delta);
+        
+        checkEnemyVsTileMap();
                 
         // Winning condition
         if (player.collideWithFloor(tileMap)) {
@@ -73,5 +87,19 @@ public class MainState extends ManagedGameState {
 
     void restart() {
         
+    }
+    
+    private void checkEnemyVsTileMap() {
+        ArrayList<Entity> enemies = (ArrayList<Entity>) em.getEntityGroup(C.Groups.ENEMIES.name);
+        Iterator it = enemies.iterator();
+        
+        while(it.hasNext()) {
+            Entity enemy = (Entity) it.next();
+            float x = enemy.getX();
+            float width = enemy.getWidth();
+            if ((x + width) > (tileMap.getX() + tileMap.getWidth()) || (x < 0)) {
+                ((Enemy) enemy).changeDirection();
+            }
+        }
     }
 }
