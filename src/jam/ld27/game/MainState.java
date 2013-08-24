@@ -59,8 +59,11 @@ public class MainState extends ManagedGameState {
         em.setGameState(C.States.MAIN_STATE.name);
         evm.update(gc, delta);
         camera.update(gc, delta);
-        
-        
+                
+        // Winning condition
+        if (player.collideWithFloor(tileMap)) {
+            player.respawn();
+        }
         
         if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
             gc.exit();

@@ -72,4 +72,12 @@ public class TileMap {
             y += tileSize;
         }
     }
+
+    public int getX() {
+        return posX;
+    }
+        
+    public int getY() {
+        return posY;
+    }
 }
