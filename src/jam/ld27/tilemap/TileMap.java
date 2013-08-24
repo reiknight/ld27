@@ -19,10 +19,24 @@ public class TileMap {
     private int tileSize;
     private int[][] map;
     private Camera camera;
+    private int rows, cols, posX, posY;
     
-    public TileMap(String textureFileName, int ts) {
+    public TileMap(int r, int c, String textureFileName, int ts) {
+        int i, j;
+        
+        rows = r;
+        cols = c;
         tileSize = ts;
         tileSet = new TileSet(textureFileName, ts);
+        posX = 0;
+        posY = 0;
+        
+        map = new int[rows][cols];
+        for (i = 0; i < rows; i += 1) {            
+            for (j = 0; j < cols; j += 1) {
+                map[i][j] = 0;
+            }
+        }
     }
     
     public void setMap(int[][] m) {
@@ -37,16 +51,24 @@ public class TileMap {
         camera = c;
     }
     
+    public int getWidth() {
+        return cols * tileSize;
+    }
+    
+    public int getHeight() {
+        return rows * tileSize;
+    }
+    
     public void render(GameContainer gc, Graphics g) {
         int i, j, l, ll;
-        float x = 0, y = 0;
+        float x = posX, y = posY;
         
         for (i = 0, l = map.length; i < l; i += 1) {
             for (j = 0, ll = map[i].length; j < ll; j += 1) {
                 tileSet.render(map[i][j], x, y);
                 x += tileSize;
             }
-            x = 0;
+            x = posY;
             y += tileSize;
         }
     }
