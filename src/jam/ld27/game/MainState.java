@@ -14,6 +14,7 @@ public class MainState extends ManagedGameState {
     private boolean paused = false;
     private Player player;
     private TileMap tileMap;
+    private Camera camera;
     private int[][] testMap = {
         {
             27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27
@@ -110,7 +111,9 @@ public class MainState extends ManagedGameState {
         
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
-        player = new Player();     
+        camera = new Camera();
+        
+        player = new Player();
         em.addEntity("motherfucker TU", player);
         
         tileMap = new TileMap(C.Textures.TILE_SET.name, 32);
@@ -121,6 +124,7 @@ public class MainState extends ManagedGameState {
     
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
+        g.translate(-camera.getOffsetX(), -camera.getOffsetY());
         em.setGameState(C.States.MAIN_STATE.name);
         tileMap.render(gc, g);
         em.render(gc, g);
@@ -130,7 +134,9 @@ public class MainState extends ManagedGameState {
     public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
         em.setGameState(C.States.MAIN_STATE.name);
         evm.update(gc, delta);
-        tileMap.centerCameraOn(player.getCenter().x, player.getCenter().y);
+        
+        camera.centerOn(player.getX(), player.getY());
+        
         if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
             gc.exit();
         }
