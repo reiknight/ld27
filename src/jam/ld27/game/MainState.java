@@ -114,6 +114,8 @@ public class MainState extends ManagedGameState {
         camera = new Camera();
         
         player = new Player();
+        camera.follow(player);
+        
         em.addEntity("motherfucker TU", player);
         
         tileMap = new TileMap(C.Textures.TILE_SET.name, 32);
@@ -134,8 +136,7 @@ public class MainState extends ManagedGameState {
     public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
         em.setGameState(C.States.MAIN_STATE.name);
         evm.update(gc, delta);
-        
-        camera.centerOn(player.getX(), player.getY());
+        camera.update(gc, delta);
         
         if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
             gc.exit();
