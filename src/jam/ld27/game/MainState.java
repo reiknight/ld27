@@ -39,7 +39,7 @@ public class MainState extends ManagedGameState {
         player = new Player();
         camera.follow(player);
         
-        em.addEntity("motherfucker TU", player);
+        em.addEntity(C.Entities.PLAYER.name, player);
         
         tileMap = new TileMap(60, 30, C.Textures.TILE_SET.name, 32);
         
