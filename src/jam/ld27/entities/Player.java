@@ -7,6 +7,7 @@ package jam.ld27.entities;
 import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.EventManager;
 import jam.ld27.game.C;
+import jam.ld27.tilemap.TileMap;
 import jam.ld27.tilemap.TileSet;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -90,6 +91,15 @@ public class Player extends Entity {
         } else {
             direccion = 0;
         }
+    }
+
+    public boolean collideWithFloor(TileMap tileMap) {
+        return (this.getY() + this.getHeight()) > (tileMap.getY() + tileMap.getHeight());
+    }
+
+    public void respawn() {
+        //TODO: Hardcode respawn position
+        this.setPosition(new Vector2f(400, 20));    
     }
     
 }
