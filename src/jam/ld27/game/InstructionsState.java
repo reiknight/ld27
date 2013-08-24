@@ -1,4 +1,4 @@
-package jam.ld26.game;
+package jam.ld27.game;
 
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;

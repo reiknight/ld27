@@ -1,4 +1,4 @@
-package jam.ld26.game;
+package jam.ld27.game;
 
 import org.newdawn.slick.geom.Vector2f;
 
@@ -65,6 +65,7 @@ public class C {
     }
 
     public static enum Groups {
+        PLAYER("player"),
         BULLETS("bullets"),
         ZOMBIES("zombies"),
         BUTTONS("buttons"),
