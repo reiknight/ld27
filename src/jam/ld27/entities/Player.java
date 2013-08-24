@@ -33,7 +33,7 @@ public class Player extends Entity {
     private double maxVelY = 1;
     
     //Graphics
-    private int frame = 4;
+    private int frame = 30;
     private TileSet tileSet = new TileSet(C.Textures.TILE_SET.name, 
             (Integer) C.Logic.TILE_SIZE.data);
     
