@@ -7,7 +7,7 @@ package jam.ld27.entities;
 import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.EventManager;
 import jam.ld27.game.C;
-import jam.ld27.tiles.TileSet;
+import jam.ld27.tilemap.TileSet;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
