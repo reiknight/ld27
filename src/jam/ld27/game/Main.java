@@ -1,5 +1,6 @@
-package jam.ld26.game;
+package jam.ld27.game;
 
+import jam.ld27.game.C;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -15,7 +16,7 @@ public class Main extends StateBasedGame {
         this.addState(new CreditsState(C.States.CREDITS_STATE.value));
         this.addState(new InstructionsState(C.States.INSTRUCTIONS_STATE.value));
         
-        this.enterState(C.States.PUBLISHER_STATE.value);
+        this.enterState(C.States.MAIN_STATE.value);
     }
     
     public static void main(String[] args) throws SlickException 

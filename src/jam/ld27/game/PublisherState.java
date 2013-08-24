@@ -1,7 +1,8 @@
-package jam.ld26.game;
+package jam.ld27.game;
 
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
+import jam.ld27.game.C;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

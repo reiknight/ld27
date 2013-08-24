@@ -1,9 +1,10 @@
-package jam.ld26.game;
+package jam.ld27.game;
 
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
 import infinitedog.frisky.gui.Button;
-import jam.ld26.entities.CrossHair;
+import jam.ld27.entities.CrossHair;
+import jam.ld27.game.C;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

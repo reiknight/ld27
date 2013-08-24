@@ -1,7 +1,8 @@
-package jam.ld26.game;
+package jam.ld27.game;
 
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
+import jam.ld27.game.C;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -15,15 +16,15 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  *
  * @author InfiniteDog
  */
-public class InstructionsState extends ManagedGameState {
+public class CreditsState extends ManagedGameState {
     
-    public InstructionsState(int stateID) {
+    public CreditsState(int stateID) {
         super(stateID);
     }
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        em.setGameState(C.States.INSTRUCTIONS_STATE.name);
+        em.setGameState(C.States.CREDITS_STATE.name);
         evm.addEvent(C.Events.BACK.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_SPACE, (Integer) C.Logic.SELECT_OPTION_DELAY.data));
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
@@ -33,27 +34,22 @@ public class InstructionsState extends ManagedGameState {
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        em.setGameState(C.States.INSTRUCTIONS_STATE.name);
+        em.setGameState(C.States.CREDITS_STATE.name);
         g.setColor(Color.white);
         g.drawString("press <SPACE> to back", 530, 50);
-        g.drawString("Instructions", 100, 50);
-        
-        g.drawString("You are the Zombie 0!", 100, 100);
-        g.drawString("Bite enemies and turn them to zombies.", 100, 115);
-        g.drawString("Bring humanity to the next evolution!", 100, 130);
-        
-        g.drawString("Whatch out! You have 60 seconds before they escape!", 100, 169);
-        
-        
-        g.drawString("WASD: Movement", 100, 200);
-        g.drawString("Space: Bite enemy", 100, 215);
-        
+        g.drawString("programmed by", 600, 350);
+        g.drawString("@ReikVal", 600, 370);
+        g.drawString("@ultrayoshi", 600, 390);
+        g.drawString("art by", 600, 430);
+        g.drawString("@_Dreisa_", 600, 450);
+        g.drawString("special thanks", 600, 490);
+        g.drawString("Our dog Zeus", 600, 510);
         em.render(container, g);
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-        em.setGameState(C.States.INSTRUCTIONS_STATE.name);
+        em.setGameState(C.States.CREDITS_STATE.name);
         
         em.update(container, delta);
         evm.update(container, delta);
