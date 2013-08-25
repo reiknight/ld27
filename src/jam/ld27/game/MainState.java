@@ -44,9 +44,8 @@ public class MainState extends ManagedGameState {
         
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
-        camera = new Camera();
         tileMap = new TileMap(200, 30, C.Textures.TILE_SET.name, 32);
-
+        camera = new Camera(tileMap);
         player = new Player();
         camera.follow(player);
         

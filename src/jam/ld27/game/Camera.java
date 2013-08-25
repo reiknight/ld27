@@ -1,22 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jam.ld27.game;
 
 import infinitedog.frisky.entities.Entity;
+import jam.ld27.tilemap.TileMap;
 import org.newdawn.slick.GameContainer;
 
-/**
- *
- * @author david
- */
 public class Camera {
     private float offsetX;
     private float offsetY;
+    private TileMap tileMap;
     private Entity following;
     
-    public Camera() {
+    public Camera(TileMap tm) {
+        tileMap = tm;
         offsetX = 0;
         offsetY = 0;
         following = null;
@@ -36,7 +31,18 @@ public class Camera {
     
     public void centerOn(float x, float y) {
         offsetX = x - C.SCREEN_WIDTH / 2;
+        if (offsetX < 0) {
+            offsetX = 0;
+        } else if(offsetX > (tileMap.getX() + tileMap.getWidth() - C.SCREEN_WIDTH)) {
+            offsetX = (tileMap.getX() + tileMap.getWidth() - C.SCREEN_WIDTH);
+        }
         offsetY = y - C.SCREEN_HEIGHT / 2;
+        
+        if (offsetY < 0) {
+            offsetY = 0;
+        } else if(offsetY > (tileMap.getY() + tileMap.getHeight() - C.SCREEN_HEIGHT)) {
+            offsetY = (tileMap.getY() + tileMap.getHeight() - C.SCREEN_HEIGHT);
+        }
     }
     
     public void update(GameContainer gc, int delta) {
