@@ -13,7 +13,7 @@ public class ConcreteWall extends Wall {
 
     @Override
     void reactionToCollisionWithPlayer(Player player) {
-        player.respawn();
+        player.die();
     }
 
     @Override

@@ -43,6 +43,8 @@ public class Player extends Entity {
     
     private int score;
     
+    private boolean dead;
+    
     public Player() {
         name = C.Entities.PLAYER.name;
         group = C.Groups.PLAYER.name;
@@ -110,10 +112,11 @@ public class Player extends Entity {
 
     public void respawn() {
         score = 99999;
+        dead = false;
         //TODO: Hardcode respawn position
         velX = 4;
         velY = 0.098;
-        this.setPosition(new Vector2f(400, 20));    
+        this.setPosition(new Vector2f(400, 0));    
     }
 
     public void setScore(int s) {
@@ -130,6 +133,15 @@ public class Player extends Entity {
 
     void setVelY(double vy) {
         velY = vy;
+    }
+
+    public void die() {
+        score = 0;
+        dead = true;
+    }
+    
+    public boolean isDead() {
+        return dead;
     }
     
 }

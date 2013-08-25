@@ -82,9 +82,8 @@ public class MainState extends ManagedGameState {
         
         checkEnemiesCollision(gc, game);
         checkPlayerCollision(gc, game);
-
-        // Winning condition
-        if (player.collideWithFloor(tileMap)) {
+        
+        if (player.isDead() || player.collideWithFloor(tileMap)) {
             gameOver(gc, game);
         }
         
@@ -116,8 +115,7 @@ public class MainState extends ManagedGameState {
             }
             
             if (enemy.getR().intersects(playerBB)){
-                player.setScore(0);
-                gameOver(gc, game);
+                player.die();
                 return;
             }
         }
