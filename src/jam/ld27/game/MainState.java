@@ -17,6 +17,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
@@ -33,6 +34,9 @@ public class MainState extends ManagedGameState {
     private int contador = 0;
     private Initiator initiator;
     
+    private int difficulty;
+    private boolean musicOn = false;
+        
     public MainState(int stateID)
     {
         super(stateID);
@@ -42,25 +46,27 @@ public class MainState extends ManagedGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame game) throws SlickException {
         em.setGameState(C.States.MAIN_STATE.name);
-        //Player movement
+        //Bind events
         evm.addEvent(C.Events.MOVE_LEFT.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_LEFT));
         evm.addEvent(C.Events.MOVE_RIGHT.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_RIGHT));
+        evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
+        evm.addEvent(C.Events.SOUND_OFF.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_M, 1000));
         
         //Load Textures
         tm.addTexture(C.Textures.CASTLE.name, C.Textures.CASTLE.path);
         tm.addTexture(C.Textures.TILE_SET.name, C.Textures.TILE_SET.path);
         tm.addTexture(C.Textures.HEART.name, C.Textures.HEART.path);
-        
-        evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
-        
+        //Load Sounds
+        sm.addMusic(C.Sounds.MUSIC.name, C.Sounds.MUSIC.path);
+        sm.addSound(C.Sounds.MUERTE.name, C.Sounds.MUERTE.path);
+        sm.addSound(C.Sounds.HEART.name, C.Sounds.HEART.path);
+
         tileMap = new TileMap(200, 25, C.Textures.TILE_SET.name, 32);
         camera = new Camera(tileMap);
         player = new Player();
         initiator = new Initiator(tileMap.getHeight());
         em.addEntity(C.Entities.HEART.name(), new Heart(400, 800));
         em.addEntity(C.Entities.PLAYER.name, player);     
-        
-        restart();
     }
     
     @Override
@@ -103,6 +109,17 @@ public class MainState extends ManagedGameState {
             contador++;
             initiator.update(gc, delta);
             camera.update(gc, delta);
+        }
+        
+        if(evm.isHappening(C.Events.SOUND_OFF.name, gc)) {
+            if(musicOn)
+                sm.getMusic(C.Sounds.MUSIC.name).stop();
+            else
+                sm.playMusic(C.Sounds.MUSIC.name);
+            musicOn = !musicOn;
+        }
+        if(!((Music)sm.getMusic(C.Sounds.MUSIC.name)).playing() && musicOn) {
+            sm.playMusic(C.Sounds.MUSIC.name);
         }
     }
 
@@ -185,8 +202,11 @@ public class MainState extends ManagedGameState {
         }
     }
     
+    public void setDifficulty(int d) {
+        difficulty = d;
+    }
+    
     private void initWalls() {
-        int difficulty = 100;
         MapGenerator mapGenerator = new MapGenerator(em, tileMap, difficulty);
         
         mapGenerator.generateWalls();
