@@ -89,6 +89,7 @@ public class C {
 
     public static enum Sounds {     
         MUERTE("muerte", "resources/sounds/muerte.wav"),
+        HEART("heart", "resources/sounds/heart.wav"),
         MUSIC("music", "resources/music/music.wav");
 
         public String name;

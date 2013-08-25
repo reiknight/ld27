@@ -5,6 +5,7 @@
 package jam.ld27.entities;
 
 import infinitedog.frisky.entities.Entity;
+import infinitedog.frisky.sounds.SoundManager;
 import jam.ld27.game.C;
 import jam.ld27.tilemap.TileSet;
 import java.util.Random;
@@ -26,6 +27,8 @@ public class Heart extends Entity {
     private TileSet tileSet = new TileSet(C.Textures.HEART.name, 
             (Integer) C.Logic.TILE_SIZE.data);
     boolean active = true;
+    
+    private SoundManager sm = SoundManager.getInstance();
     
     public Heart() {
         name = C.Entities.HEART.name;
@@ -75,6 +78,7 @@ public class Heart extends Entity {
         if(p.getR().intersects(this.getR())) {
             p.setScore(p.getScore() + ((int)Math.ceil(-1*velY) + type + 1)*10);
             active = false;
+            sm.playSound(C.Sounds.HEART.name);
         }
     }
 

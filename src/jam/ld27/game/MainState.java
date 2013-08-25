@@ -55,7 +55,7 @@ public class MainState extends ManagedGameState {
         //Load Sounds
         sm.addMusic(C.Sounds.MUSIC.name, C.Sounds.MUSIC.path);
         sm.addSound(C.Sounds.MUERTE.name, C.Sounds.MUERTE.path);
-
+        sm.addSound(C.Sounds.HEART.name, C.Sounds.HEART.path);
 
         tileMap = new TileMap(200, 25, C.Textures.TILE_SET.name, 32);
         camera = new Camera(tileMap);
