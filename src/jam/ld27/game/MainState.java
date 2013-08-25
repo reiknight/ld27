@@ -54,6 +54,7 @@ public class MainState extends ManagedGameState {
         tm.addTexture(C.Textures.HEART.name, C.Textures.HEART.path);
         //Load Sounds
         sm.addMusic(C.Sounds.MUSIC.name, C.Sounds.MUSIC.path);
+        sm.addSound(C.Sounds.MUERTE.name, C.Sounds.MUERTE.path);
 
 
         tileMap = new TileMap(200, 25, C.Textures.TILE_SET.name, 32);

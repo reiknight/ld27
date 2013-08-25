@@ -6,6 +6,7 @@ package jam.ld27.entities;
 
 import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.EventManager;
+import infinitedog.frisky.sounds.SoundManager;
 import jam.ld27.game.C;
 import jam.ld27.tilemap.TileMap;
 import jam.ld27.tilemap.TileSet;
@@ -40,7 +41,8 @@ public class Player extends Entity {
     
     //Managers
     private EventManager evm = EventManager.getInstance();
-    
+    private SoundManager sm = SoundManager.getInstance();
+
     private int score;
     
     private boolean dead;
@@ -138,6 +140,7 @@ public class Player extends Entity {
     public void die() {
         score = 0;
         dead = true;
+        sm.playSound(C.Sounds.MUERTE.name);
     }
     
     public boolean isDead() {
