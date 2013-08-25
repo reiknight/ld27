@@ -3,8 +3,11 @@ package jam.ld27.game;
 import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
+import jam.ld27.entities.ConcreteWall;
 import jam.ld27.entities.Enemy;
 import jam.ld27.entities.Player;
+import jam.ld27.entities.ConcreteWall;
+import jam.ld27.entities.Wall;
 import jam.ld27.tilemap.TileMap;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,8 +52,13 @@ public class MainState extends ManagedGameState {
         player = new Player();
         camera.follow(player);
         
-        em.addEntity(C.Entities.PLAYER.name, player);        
+        em.addEntity(C.Entities.PLAYER.name, player);     
         
+        int[][] wallExample1 = {{0,1,0},{1,1,1}};
+        em.addEntity(C.Entities.WALL.name + "0", new ConcreteWall(256, 256, wallExample1, C.Textures.TILE_SET.name, 32));        
+        int[][] wallExample2 = {{1,1,0},{0,1,1}};
+        em.addEntity(C.Entities.WALL.name + "1", new ConcreteWall(512, 256, wallExample2, C.Textures.TILE_SET.name, 32));        
+
         restart();
     }
     
@@ -122,6 +130,13 @@ public class MainState extends ManagedGameState {
             if((px + player.getWidth()) > (tileMap.getX() + tileMap.getWidth())) {
                 player.setPosition(new Vector2f(tileMap.getX() + tileMap.getWidth() - player.getWidth(), py));
             }
+        }
+        
+        ArrayList<Entity> walls = (ArrayList<Entity>) em.getEntityGroup(C.Groups.WALLS.name);
+        Iterator it = walls.iterator();
+        while(it.hasNext()) {
+            Wall wall = (Wall) it.next();
+            wall.checkCollisionWithPlayer(player);
         }
     }
     
