@@ -8,6 +8,7 @@ import jam.ld27.entities.Enemy;
 import jam.ld27.entities.Player;
 import jam.ld27.entities.ConcreteWall;
 import jam.ld27.entities.Wall;
+import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,17 +49,22 @@ public class MainState extends ManagedGameState {
         
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
-        tileMap = new TileMap(75, 25, C.Textures.TILE_SET.name, 32);
+//<<<<<<< Updated upstream
+//        tileMap = new TileMap(75, 25, C.Textures.TILE_SET.name, 32);
+//=======
+        tileMap = new TileMap(200, 30, C.Textures.TILE_SET.name, 32);
+        tileMap.setMap(new MapGenerator().generateMap(200, 25, 100));
+//>>>>>>> Stashed changes
         camera = new Camera(tileMap);
         player = new Player();
         camera.follow(player);
         
         em.addEntity(C.Entities.PLAYER.name, player);     
         
-        int[][] wallExample1 = {{0,1,0},{1,1,1}};
-        em.addEntity(C.Entities.WALL.name + "0", new ConcreteWall(256, 256, wallExample1, C.Textures.TILE_SET.name, 32));        
-        int[][] wallExample2 = {{1,1,0},{0,1,1}};
-        em.addEntity(C.Entities.WALL.name + "1", new ConcreteWall(512, 256, wallExample2, C.Textures.TILE_SET.name, 32));        
+//        int[][] wallExample1 = {{0,1,0},{1,1,1}};
+//        em.addEntity(C.Entities.WALL.name + "0", new ConcreteWall(256, 256, wallExample1, C.Textures.TILE_SET.name, 32));        
+//        int[][] wallExample2 = {{1,1,0},{0,1,1}};
+//        em.addEntity(C.Entities.WALL.name + "1", new ConcreteWall(512, 256, wallExample2, C.Textures.TILE_SET.name, 32));        
 
         restart();
     }
