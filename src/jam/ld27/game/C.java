@@ -40,6 +40,7 @@ public class C {
         TILE_SET("tile_set", "resources/textures/tile_set.png"),
         LOGO("logo", "resources/textures/logo.png"),
         ENEMY("enemy", "resources/textures/enemy.png"),
+        HEART("heart", "resources/textures/hearts.png"),
         BACKGROUND("background", "resources/textures/background.jpg");
 
         public String name;
@@ -56,6 +57,7 @@ public class C {
         ZOMBIE("zombie"),
         CROSSHAIR("crosshair"),
         ENEMY("enemy"),
+        HEART("heart"),
         WALL("wall");
 
         public String name;
@@ -71,6 +73,7 @@ public class C {
         ZOMBIES("zombies"),
         BUTTONS("buttons"),
         ENEMIES("enemies"),
+        HEARTS("hearts"),
         WALLS("walls");
 
         public String name;

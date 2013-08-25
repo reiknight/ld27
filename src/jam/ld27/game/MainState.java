@@ -8,6 +8,7 @@ import jam.ld27.entities.Enemy;
 import jam.ld27.entities.Player;
 import jam.ld27.entities.ConcreteWall;
 import jam.ld27.entities.FragileWall;
+import jam.ld27.entities.Heart;
 import jam.ld27.entities.Wall;
 import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
@@ -47,16 +48,17 @@ public class MainState extends ManagedGameState {
         //Load Textures
         tm.addTexture(C.Textures.BACKGROUND.name, C.Textures.BACKGROUND.path);
         tm.addTexture(C.Textures.TILE_SET.name, C.Textures.TILE_SET.path);
+        tm.addTexture(C.Textures.HEART.name, C.Textures.HEART.path);
         
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
         tileMap = new TileMap(200, 30, C.Textures.TILE_SET.name, 32);
         tileMap.setMap(new MapGenerator().generateMap(200, 25, 100));
-        
+               
         camera = new Camera(tileMap);
         player = new Player();
         camera.follow(player);
-        
+        em.addEntity(C.Entities.HEART.name(), new Heart(400, 800));
         em.addEntity(C.Entities.PLAYER.name, player);     
         
         restart();
@@ -145,6 +147,13 @@ public class MainState extends ManagedGameState {
                     em.removeEntity(wall.getName());
                 }
                 return;
+            }
+        }
+        
+        for(Entity e: (ArrayList<Entity>) em.getEntityGroup(C.Groups.HEARTS.name)) {
+            Heart heart = (Heart) e;
+            if(heart.isActive()) {
+                heart.checkCollision(player);
             }
         }
     }

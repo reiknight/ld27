@@ -71,7 +71,7 @@ public class Player extends Entity {
             }
         }
         //Applying movement to character:
-        movement(gc, delta);
+        movement(gc);
         //Velocity of the character:
         y += velY;
         x += direccion*velX;
@@ -91,14 +91,14 @@ public class Player extends Entity {
      * @param gc
      * @param delta 
      */
-    private void movement(GameContainer gc, int delta) {
+    private void movement(GameContainer gc) {
         //TODO: remove score based on movement. Hardcoded
         if(evm.isHappening(C.Events.MOVE_LEFT.name, gc)) {
             direccion = -1;
-            score -= 10;
+//            score -= 10;
         } else if(evm.isHappening(C.Events.MOVE_RIGHT.name, gc)) {
             direccion = 1;
-            score -= 10;
+//            score -= 10;
         } else {
             direccion = 0;
         }
@@ -109,7 +109,7 @@ public class Player extends Entity {
     }
 
     public void respawn() {
-        score = 99999;
+        score = 0;
         //TODO: Hardcode respawn position
         velX = 4;
         velY = 0.098;
