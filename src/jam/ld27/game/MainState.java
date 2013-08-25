@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Random;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
@@ -45,13 +46,12 @@ public class MainState extends ManagedGameState {
         evm.addEvent(C.Events.MOVE_RIGHT.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_RIGHT));
         
         //Load Textures
-        tm.addTexture(C.Textures.BACKGROUND.name, C.Textures.BACKGROUND.path);
+        tm.addTexture(C.Textures.CASTLE.name, C.Textures.CASTLE.path);
         tm.addTexture(C.Textures.TILE_SET.name, C.Textures.TILE_SET.path);
         
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
-        tileMap = new TileMap(200, 30, C.Textures.TILE_SET.name, 32);
-        tileMap.setMap(new MapGenerator().generateMap(200, 25, 100));
+        tileMap = new TileMap(200, 25, C.Textures.TILE_SET.name, 32);
         
         camera = new Camera(tileMap);
         player = new Player();
@@ -68,8 +68,9 @@ public class MainState extends ManagedGameState {
 
         g.pushTransform();        
         g.translate(-camera.getOffsetX(), -camera.getOffsetY());
-        g.drawImage(tm.getTexture(C.Textures.BACKGROUND.name), 0, 0);
+        Image castle = tm.getTexture(C.Textures.CASTLE.name);
         tileMap.render(gc, g);
+        g.drawImage(castle, 0, tileMap.getY() + tileMap.getHeight() - castle.getHeight());
         em.render(gc, g);
         g.popTransform();
         
@@ -171,6 +172,8 @@ public class MainState extends ManagedGameState {
         em.addEntity(C.Entities.WALL.name + "0", new FragileWall(256, 256, wallExample1, C.Textures.TILE_SET.name, 32));        
         em.addEntity(C.Entities.WALL.name + "1", new FragileWall(256, 512, wallExample1, C.Textures.TILE_SET.name, 32));    
         em.addEntity(C.Entities.WALL.name + "2", new FragileWall(256, 768, wallExample1, C.Textures.TILE_SET.name, 32));    
-        em.addEntity(C.Entities.WALL.name + "3", new FragileWall(256, 1024, wallExample1, C.Textures.TILE_SET.name, 32));    
+        em.addEntity(C.Entities.WALL.name + "3", new FragileWall(256, 1024, wallExample1, C.Textures.TILE_SET.name, 32));
+        
+        //tileMap.setMap(new MapGenerator().generateMap(200, 25, 100));
     }
 }
