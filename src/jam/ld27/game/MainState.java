@@ -122,6 +122,7 @@ public class MainState extends ManagedGameState {
     }
 
     private void gameOver(GameContainer gc, StateBasedGame game) {
+       ((GameOverState)game.getState(C.States.GAME_OVER_STATE.value)).setScore(player.getScore());
        game.enterState(C.States.GAME_OVER_STATE.value, new FadeOutTransition(), new FadeInTransition());
     }
 }

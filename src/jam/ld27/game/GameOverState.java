@@ -17,6 +17,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * @author InfiniteDog
  */
 public class GameOverState extends ManagedGameState {
+    private int score;
     
     public GameOverState(int stateID) {
         super(stateID);
@@ -34,7 +35,7 @@ public class GameOverState extends ManagedGameState {
         em.setGameState(C.States.GAME_OVER_STATE.name);
         g.setColor(Color.white);
         g.drawString("press <SPACE> to back", 530, 50);
-        g.drawString("Score: 00000", 0, 0);
+        g.drawString("Score: " + score, 0, 0);
         em.render(container, g);
     }
 
@@ -46,11 +47,16 @@ public class GameOverState extends ManagedGameState {
         evm.update(container, delta);
         
         if(evm.isHappening(C.Events.BACK.name, container)) {
+            ((MainState)game.getState(C.States.MAIN_STATE.value)).restart();
             game.enterState(C.States.MAIN_STATE.value, new FadeOutTransition(), new FadeInTransition());
         }
         if(evm.isHappening(C.Events.CLOSE_WINDOW.name, container)) {
             container.exit();
         }
+    }
+    
+    public void setScore(int s) {
+        score = s;        
     }
     
 }
