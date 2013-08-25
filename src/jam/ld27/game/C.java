@@ -10,6 +10,7 @@ public class C {
 
     public static enum Events {
         CLOSE_WINDOW("close_window"),
+        SOUND_OFF("sound_off"),
         MOVE_LEFT("move_left"),
         MOVE_RIGHT("move_right"),
         MOVE_UP("move_up"),
@@ -90,7 +91,7 @@ public class C {
         ZOMBIE_BITE("zombie_bite", "resources/sounds/zombie4.wav"),
         ZOMBIE_GROWL("zombie_growl", "resources/sounds/zombie2.wav"),
         FIRE("fire", "resources/sounds/fire.wav"),
-        MUSIC("music", "resources/music.ogg");
+        MUSIC("music", "resources/music/music.wav");
 
         public String name;
         public String path;

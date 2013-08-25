@@ -16,6 +16,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
@@ -30,7 +31,8 @@ public class MainState extends ManagedGameState {
     private Camera camera;
     private int nEnemies = 10;
     private int difficulty;
-    
+    private boolean musicOn = false;
+        
     public MainState(int stateID)
     {
         super(stateID);
@@ -40,17 +42,20 @@ public class MainState extends ManagedGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame game) throws SlickException {
         em.setGameState(C.States.MAIN_STATE.name);
-        //Player movement
+        //Bind events
         evm.addEvent(C.Events.MOVE_LEFT.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_LEFT));
         evm.addEvent(C.Events.MOVE_RIGHT.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_RIGHT));
+        evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
+        evm.addEvent(C.Events.SOUND_OFF.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_M, 1000));
         
         //Load Textures
         tm.addTexture(C.Textures.CASTLE.name, C.Textures.CASTLE.path);
         tm.addTexture(C.Textures.TILE_SET.name, C.Textures.TILE_SET.path);
         tm.addTexture(C.Textures.HEART.name, C.Textures.HEART.path);
-        
-        evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
-        
+        //Load Sounds
+        sm.addMusic(C.Sounds.MUSIC.name, C.Sounds.MUSIC.path);
+
+
         tileMap = new TileMap(200, 25, C.Textures.TILE_SET.name, 32);
         camera = new Camera(tileMap);
         player = new Player();
@@ -90,6 +95,17 @@ public class MainState extends ManagedGameState {
         if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
             gc.exit();
         }
+        if(evm.isHappening(C.Events.SOUND_OFF.name, gc)) {
+            if(musicOn)
+                sm.getMusic(C.Sounds.MUSIC.name).stop();
+            else
+                sm.playMusic(C.Sounds.MUSIC.name);
+            musicOn = !musicOn;
+        }
+        if(!((Music)sm.getMusic(C.Sounds.MUSIC.name)).playing() && musicOn) {
+            sm.playMusic(C.Sounds.MUSIC.name);
+        }
+            
         em.update(gc, delta);
     }
 
