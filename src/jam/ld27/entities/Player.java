@@ -41,16 +41,20 @@ public class Player extends Entity {
     //Managers
     private EventManager evm = EventManager.getInstance();
     
+    private int score;
+    
     public Player() {
         name = C.Entities.PLAYER.name;
         group = C.Groups.PLAYER.name;
         //TODO: Cuadrado de colisión: "menor al personaje, un 50% apróximadamente, interno a este"
-        this.posX = 400;
-        this.setPosition(new Vector2f(posX, 20));
+        //this.posX = 400;
+        //this.setPosition(new Vector2f(posX, 20));
         
          // TODO: harcoded dimensions
         setWidth(32);
         setHeight(32);
+        
+        respawn();
     }
     
     @Override
@@ -88,10 +92,13 @@ public class Player extends Entity {
      * @param delta 
      */
     private void movement(GameContainer gc, int delta) {
+        //TODO: remove score based on movement. Hardcoded
         if(evm.isHappening(C.Events.MOVE_LEFT.name, gc)) {
             direccion = -1;
+            score -= 10;
         } else if(evm.isHappening(C.Events.MOVE_RIGHT.name, gc)) {
             direccion = 1;
+            score -= 10;
         } else {
             direccion = 0;
         }
@@ -102,10 +109,19 @@ public class Player extends Entity {
     }
 
     public void respawn() {
+        score = 99999;
         //TODO: Hardcode respawn position
         velX = 4;
         velY = 0.098;
         this.setPosition(new Vector2f(400, 20));    
+    }
+
+    public void setScore(int s) {
+        score = s;        
+    }
+
+    public int getScore() {
+        return score;
     }
     
 }

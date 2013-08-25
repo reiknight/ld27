@@ -99,6 +99,7 @@ public class C {
         MAIN_STATE("main", 1),
         PUBLISHER_STATE("publisher", 2),
         INSTRUCTIONS_STATE("instructions", 3),
+        GAME_OVER_STATE("game_over", 4),
         CREDITS_STATE("credits", 9);
 
         public String name;

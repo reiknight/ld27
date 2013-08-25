@@ -15,6 +15,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class MainState extends ManagedGameState {
     private boolean paused = false;
@@ -54,10 +56,13 @@ public class MainState extends ManagedGameState {
     
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
+        g.pushTransform();
         g.translate(-camera.getOffsetX(), -camera.getOffsetY());
         em.setGameState(C.States.MAIN_STATE.name);
         tileMap.render(gc, g);
         em.render(gc, g);
+        g.popTransform();
+        g.drawString("Score: " + player.getScore(), 0, 0);
     }
 
     @Override
@@ -66,11 +71,11 @@ public class MainState extends ManagedGameState {
         evm.update(gc, delta);
         camera.update(gc, delta);
         
-        checkEnemiesCollision();
+        checkEnemiesCollision(gc, game);
                 
         // Winning condition
         if (player.collideWithFloor(tileMap)) {
-            restart();
+            gameOver(gc, game);
         }
         
         if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
@@ -94,7 +99,7 @@ public class MainState extends ManagedGameState {
         }
     }
     
-    private void checkEnemiesCollision() {
+    private void checkEnemiesCollision(GameContainer gc, StateBasedGame game) {
         ArrayList<Entity> enemies = (ArrayList<Entity>) em.getEntityGroup(C.Groups.ENEMIES.name);
         Iterator it = enemies.iterator();
         Shape playerBB = player.getR();
@@ -109,9 +114,14 @@ public class MainState extends ManagedGameState {
             }
             
             if (enemy.getR().intersects(playerBB)){
-                restart();
+                player.setScore(0);
+                gameOver(gc, game);
                 return;
             }
         }
+    }
+
+    private void gameOver(GameContainer gc, StateBasedGame game) {
+       game.enterState(C.States.GAME_OVER_STATE.value, new FadeOutTransition(), new FadeInTransition());
     }
 }
