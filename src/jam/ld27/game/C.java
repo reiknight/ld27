@@ -39,7 +39,8 @@ public class C {
         WALL("wall", "resources/textures/wall.png"),
         TILE_SET("tile_set", "resources/textures/tile_set.png"),
         LOGO("logo", "resources/textures/logo.png"),
-        ENEMY("enemy", "resources/textures/enemy.png");
+        ENEMY("enemy", "resources/textures/enemy.png"),
+        BACKGROUND("background", "resources/textures/background.jpg");
 
         public String name;
         public String path;

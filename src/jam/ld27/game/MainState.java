@@ -9,6 +9,7 @@ import jam.ld27.entities.Player;
 import jam.ld27.entities.ConcreteWall;
 import jam.ld27.entities.FragileWall;
 import jam.ld27.entities.Wall;
+import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,28 +45,34 @@ public class MainState extends ManagedGameState {
         evm.addEvent(C.Events.MOVE_RIGHT.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_RIGHT));
         
         //Load Textures
+        tm.addTexture(C.Textures.BACKGROUND.name, C.Textures.BACKGROUND.path);
         tm.addTexture(C.Textures.TILE_SET.name, C.Textures.TILE_SET.path);
         
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
         tileMap = new TileMap(200, 30, C.Textures.TILE_SET.name, 32);
+        tileMap.setMap(new MapGenerator().generateMap(200, 25, 100));
+        
         camera = new Camera(tileMap);
         player = new Player();
         camera.follow(player);
         
-        em.addEntity(C.Entities.PLAYER.name, player);        
-
+        em.addEntity(C.Entities.PLAYER.name, player);     
+        
         restart();
     }
     
     @Override
     public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
-        g.pushTransform();
-        g.translate(-camera.getOffsetX(), -camera.getOffsetY());
         em.setGameState(C.States.MAIN_STATE.name);
+
+        g.pushTransform();        
+        g.translate(-camera.getOffsetX(), -camera.getOffsetY());
+        g.drawImage(tm.getTexture(C.Textures.BACKGROUND.name), 0, 0);
         tileMap.render(gc, g);
         em.render(gc, g);
         g.popTransform();
+        
         g.drawString("Score: " + player.getScore(), 0, 0);
     }
 

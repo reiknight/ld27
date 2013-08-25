@@ -1,6 +1,5 @@
 package jam.ld27.game;
 
-import jam.ld27.game.C;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
