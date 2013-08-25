@@ -73,8 +73,8 @@ public class Player extends Entity {
         //Applying movement to character:
         movement(gc, delta);
         //Velocity of the character:
-        y += velY;
-        x += direccion*velX;
+        y += Math.ceil(velY);
+        x += Math.ceil(direccion*velX);
         //Setting the character:
         this.setPosition(new Vector2f(x,y));
     }
