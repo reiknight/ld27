@@ -38,8 +38,8 @@ public class Enemy extends Entity{
     
     @Override
     public void update(GameContainer gc, int delta) {
-        float x = getX() + direction * velX * ((float) delta / 1000);
-        float y = getY() + velY * ((float) delta / 1000);
+        float x = (float) Math.ceil(getX() + direction * velX * ((float) delta / 1000));
+        float y = (float) Math.ceil(getY() + velY * ((float) delta / 1000));
         setPosition(new Vector2f(x, y));
     }
     

@@ -16,7 +16,7 @@ public class Main extends StateBasedGame {
         this.addState(new InstructionsState(C.States.INSTRUCTIONS_STATE.value));
         this.addState(new GameOverState(C.States.GAME_OVER_STATE.value));
         
-        this.enterState(C.States.MAIN_STATE.value);
+        this.enterState(C.States.START_STATE.value);
     }
     
     public static void main(String[] args) throws SlickException 

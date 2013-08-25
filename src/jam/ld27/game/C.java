@@ -35,6 +35,9 @@ public class C {
         BUTTON_CREDITS("button_credits", "resources/textures/button_credits.png"),
         BUTTON_PLAY("button_play", "resources/textures/button_play.png"),
         BUTTON_INSTRUCTIONS("button_instructions", "resources/textures/button_instructions.png"),
+        BUTTON_EASY("button_easy", "resources/textures/button_easy.png"),
+        BUTTON_NORMAL("button_normal", "resources/textures/button_normal.png"),
+        BUTTON_HARD("button_hard", "resources/textures/button_hard.png"),
         CROSSHAIR("crosshair", "resources/textures/crosshair.png"),
         WALL("wall", "resources/textures/wall.png"),
         TILE_SET("tile_set", "resources/textures/tile_set.png"),
@@ -134,7 +137,10 @@ public class C {
      public static enum Buttons {
         CREDITS(Textures.BUTTON_CREDITS.name, "", new Vector2f(150, 450), new Vector2f(45, 25)),
         START_GAME(Textures.BUTTON_PLAY.name, "", new Vector2f(340, 450), new Vector2f(45, 25)),
-        INSTRUCTIONS(Textures.BUTTON_INSTRUCTIONS.name, "", new Vector2f(550, 450), new Vector2f(45, 25));
+        INSTRUCTIONS(Textures.BUTTON_INSTRUCTIONS.name, "", new Vector2f(550, 450), new Vector2f(45, 25)),
+        EASY(Textures.BUTTON_EASY.name, "", new Vector2f(150, 450), new Vector2f(45, 25)),
+        NORMAL(Textures.BUTTON_NORMAL.name, "", new Vector2f(340, 450), new Vector2f(45, 25)),
+        HARD(Textures.BUTTON_HARD.name, "", new Vector2f(550, 450), new Vector2f(45, 25));
 
         public String textureName;
         public String label;

@@ -29,6 +29,7 @@ public class MainState extends ManagedGameState {
     private TileMap tileMap;
     private Camera camera;
     private int nEnemies = 10;
+    private int difficulty;
     
     public MainState(int stateID)
     {
@@ -56,8 +57,6 @@ public class MainState extends ManagedGameState {
         camera.follow(player);
         em.addEntity(C.Entities.HEART.name(), new Heart(400, 800));
         em.addEntity(C.Entities.PLAYER.name, player);     
-        
-        restart();
     }
     
     @Override
@@ -170,8 +169,11 @@ public class MainState extends ManagedGameState {
         }
     }
     
+    public void setDifficulty(int d) {
+        difficulty = d;
+    }
+    
     private void initWalls() {
-        int difficulty = 100;
         MapGenerator mapGenerator = new MapGenerator(em, tileMap, difficulty);
         
         mapGenerator.generateWalls();
