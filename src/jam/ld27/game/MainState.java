@@ -7,6 +7,7 @@ import jam.ld27.entities.ConcreteWall;
 import jam.ld27.entities.Enemy;
 import jam.ld27.entities.Player;
 import jam.ld27.entities.ConcreteWall;
+import jam.ld27.entities.FragileWall;
 import jam.ld27.entities.Wall;
 import jam.ld27.tilemap.TileMap;
 import java.util.ArrayList;
@@ -52,12 +53,7 @@ public class MainState extends ManagedGameState {
         player = new Player();
         camera.follow(player);
         
-        em.addEntity(C.Entities.PLAYER.name, player);     
-        
-        int[][] wallExample1 = {{0,1,0},{1,1,1}};
-        em.addEntity(C.Entities.WALL.name + "0", new ConcreteWall(256, 256, wallExample1, C.Textures.TILE_SET.name, 32));        
-        int[][] wallExample2 = {{1,1,0},{0,1,1}};
-        em.addEntity(C.Entities.WALL.name + "1", new ConcreteWall(512, 256, wallExample2, C.Textures.TILE_SET.name, 32));        
+        em.addEntity(C.Entities.PLAYER.name, player);        
 
         restart();
     }
@@ -96,7 +92,8 @@ public class MainState extends ManagedGameState {
     void restart() {
         em.setGameState(C.States.MAIN_STATE.name);
         player.respawn();             
-        //initEnemies();
+        initEnemies();
+        initWalls();        
     }
     
     private void checkEnemiesCollision(GameContainer gc, StateBasedGame game) {
@@ -136,7 +133,12 @@ public class MainState extends ManagedGameState {
         Iterator it = walls.iterator();
         while(it.hasNext()) {
             Wall wall = (Wall) it.next();
-            wall.checkCollisionWithPlayer(player);
+            if (wall.checkCollisionWithPlayer(player)) {
+                if (wall.isDestroyable()) {
+                    em.removeEntity(wall.getName());
+                }
+                return;
+            }
         }
     }
     
@@ -155,5 +157,13 @@ public class MainState extends ManagedGameState {
             float y = new Random().nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
             em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
         }
+    }
+    
+    private void initWalls() {
+        int[][] wallExample1 = {{1,1,1},{1,1,1}};
+        em.addEntity(C.Entities.WALL.name + "0", new FragileWall(256, 256, wallExample1, C.Textures.TILE_SET.name, 32));        
+        em.addEntity(C.Entities.WALL.name + "1", new FragileWall(256, 512, wallExample1, C.Textures.TILE_SET.name, 32));    
+        em.addEntity(C.Entities.WALL.name + "2", new FragileWall(256, 768, wallExample1, C.Textures.TILE_SET.name, 32));    
+        em.addEntity(C.Entities.WALL.name + "3", new FragileWall(256, 1024, wallExample1, C.Textures.TILE_SET.name, 32));    
     }
 }

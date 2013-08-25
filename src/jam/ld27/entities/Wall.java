@@ -13,6 +13,7 @@ public abstract class Wall extends Entity {
     private TileSet tileSet;
     private int[][] collisionBoxes;
     private int tileSize;
+    protected int frame;
     
     public Wall(float x, float y, int[][] cb, String textureFileName, int ts) {
       tileSet = new TileSet(textureFileName, ts);
@@ -20,6 +21,9 @@ public abstract class Wall extends Entity {
       collisionBoxes = cb;
       setGroup(C.Groups.WALLS.name);
       setPosition(new Vector2f(x, y));
+      
+      //TODO: ultra hardcoded
+      frame = 0;
     }
     
     public void render(GameContainer gc, Graphics g) {
@@ -30,7 +34,7 @@ public abstract class Wall extends Entity {
             for (j = 0, ll = collisionBoxes[i].length; j < ll; j += 1) {
                 if (collisionBoxes[i][j] == 1) {
                     // TODO: hardcoded frame
-                    tileSet.render(2, x, y);
+                    tileSet.render(frame, x, y);
                 }
                 x += tileSize;
             }
@@ -43,7 +47,7 @@ public abstract class Wall extends Entity {
         
     }
     
-    public void checkCollisionWithPlayer(Player player) {
+    public boolean checkCollisionWithPlayer(Player player) {
         int i, j, l, ll;
         float x = getX(), y = getY();
         Shape playerBB = player.getR();
@@ -54,6 +58,7 @@ public abstract class Wall extends Entity {
                     Shape collisionBoxBB = new Rectangle(x, y, tileSize, tileSize);
                     if (collisionBoxBB.intersects(playerBB)) {
                         reactionToCollisionWithPlayer(player);
+                        return true;
                     }
                 }
                 x += tileSize;
@@ -61,7 +66,10 @@ public abstract class Wall extends Entity {
             x = getX();
             y += tileSize;
         }
+        
+        return false;
     }
 
     abstract void reactionToCollisionWithPlayer(Player player);
+    public abstract boolean isDestroyable();
 }

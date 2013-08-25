@@ -123,5 +123,13 @@ public class Player extends Entity {
     public int getScore() {
         return score;
     }
+
+    double getVelY() {
+        return velY;
+    }
+
+    void setVelY(double vy) {
+        velY = vy;
+    }
     
 }
