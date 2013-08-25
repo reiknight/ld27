@@ -6,6 +6,7 @@ import infinitedog.frisky.game.ManagedGameState;
 import jam.ld27.entities.Enemy;
 import jam.ld27.entities.Player;
 import jam.ld27.entities.Heart;
+import jam.ld27.entities.Initiator;
 import jam.ld27.entities.Wall;
 import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
@@ -29,6 +30,8 @@ public class MainState extends ManagedGameState {
     private TileMap tileMap;
     private Camera camera;
     private int nEnemies = 10;
+    private int contador = 0;
+    private Initiator initiator;
     
     public MainState(int stateID)
     {
@@ -53,7 +56,7 @@ public class MainState extends ManagedGameState {
         tileMap = new TileMap(200, 25, C.Textures.TILE_SET.name, 32);
         camera = new Camera(tileMap);
         player = new Player();
-        camera.follow(player);
+        initiator = new Initiator(tileMap.getHeight());
         em.addEntity(C.Entities.HEART.name(), new Heart(400, 800));
         em.addEntity(C.Entities.PLAYER.name, player);     
         
@@ -78,25 +81,37 @@ public class MainState extends ManagedGameState {
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
         em.setGameState(C.States.MAIN_STATE.name);
-        evm.update(gc, delta);
-        camera.update(gc, delta);
-        
-        checkEnemiesCollision(gc, game);
-        checkPlayerCollision(gc, game);
-        
-        if (player.isDead() || player.collideWithFloor(tileMap)) {
-            gameOver(gc, game);
+        if(contador > 601) {
+            evm.update(gc, delta);
+            camera.update(gc, delta);
+
+            checkEnemiesCollision(gc, game);
+            checkPlayerCollision(gc, game);
+
+            if (player.isDead() || player.collideWithFloor(tileMap)) {
+                gameOver(gc, game);
+            }
+
+            if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
+                gc.exit();
+            }
+            em.update(gc, delta);
+        } else if(contador == 601) {
+            contador++;
+            camera.follow(player);
+        } else {
+            contador++;
+            initiator.update(gc, delta);
+            camera.update(gc, delta);
         }
-        
-        if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
-            gc.exit();
-        }
-        em.update(gc, delta);
     }
 
     void restart() {
         em.setGameState(C.States.MAIN_STATE.name);
-        player.respawn();             
+        player.respawn();
+        contador = 0;
+        initiator.setH(tileMap.getHeight());
+        camera.follow(initiator);
         initEnemies();
         initWalls();        
     }
