@@ -11,19 +11,20 @@ import org.newdawn.slick.geom.Vector2f;
 
 public abstract class Wall extends Entity {
     private TileSet tileSet;
-    private int[][] collisionBoxes;
     private int tileSize;
+    protected int[][] collisionBoxes;
     protected int frame;
     
-    public Wall(float x, float y, int[][] cb, String textureFileName, int ts) {
+    public Wall(float x, float y, String textureFileName, int ts) {
       tileSet = new TileSet(textureFileName, ts);
       tileSize = ts;
-      collisionBoxes = cb;
       setGroup(C.Groups.WALLS.name);
       setPosition(new Vector2f(x, y));
       
       //TODO: ultra hardcoded
       frame = 0;
+      int[][] cb = {{1,1,1},{1,1,1}};
+      collisionBoxes = cb;
     }
     
     public void render(GameContainer gc, Graphics g) {
