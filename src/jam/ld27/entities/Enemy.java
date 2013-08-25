@@ -19,7 +19,8 @@ public class Enemy extends Entity{
         group = C.Groups.ENEMIES.name;
         this.setPosition(new Vector2f(x, y));
         
-        // TODO: width harcoded
+        // TODO: dimensions harcoded
+        setHeight(32);
         setWidth(32);
         
         // TODO: frame and velX harcoded

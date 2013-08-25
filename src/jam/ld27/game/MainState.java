@@ -13,6 +13,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class MainState extends ManagedGameState {
@@ -46,14 +47,7 @@ public class MainState extends ManagedGameState {
         player = new Player();
         camera.follow(player);
         
-        em.addEntity(C.Entities.PLAYER.name, player);
-        
-        int i;
-        for (i = 0; i < nEnemies; i += 1) {
-            float x = new Random().nextFloat() * tileMap.getWidth() - tileMap.getTileSize();
-            float y = new Random().nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
-            em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
-        }
+        em.addEntity(C.Entities.PLAYER.name, player);        
         
         restart();
     }
@@ -72,11 +66,11 @@ public class MainState extends ManagedGameState {
         evm.update(gc, delta);
         camera.update(gc, delta);
         
-        checkEnemyVsTileMap();
+        checkEnemiesCollision();
                 
         // Winning condition
         if (player.collideWithFloor(tileMap)) {
-            player.respawn();
+            restart();
         }
         
         if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
@@ -86,19 +80,37 @@ public class MainState extends ManagedGameState {
     }
 
     void restart() {
-        
+        em.setGameState(C.States.MAIN_STATE.name);
+
+        player.respawn();
+        em.removeEntityGroup(C.Groups.ENEMIES.name);
+        em.forceRemoval();
+                
+        int i;
+        for (i = 0; i < nEnemies; i += 1) {
+            float x = new Random().nextFloat() * tileMap.getWidth() - tileMap.getTileSize();
+            float y = new Random().nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
+            em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
+        }
     }
     
-    private void checkEnemyVsTileMap() {
+    private void checkEnemiesCollision() {
         ArrayList<Entity> enemies = (ArrayList<Entity>) em.getEntityGroup(C.Groups.ENEMIES.name);
         Iterator it = enemies.iterator();
+        Shape playerBB = player.getR();
         
         while(it.hasNext()) {
-            Entity enemy = (Entity) it.next();
+            Enemy enemy = (Enemy) it.next();
             float x = enemy.getX();
             float width = enemy.getWidth();
+            
             if ((x + width) > (tileMap.getX() + tileMap.getWidth()) || (x < 0)) {
-                ((Enemy) enemy).changeDirection();
+                enemy.changeDirection();
+            }
+            
+            if (enemy.getR().intersects(playerBB)){
+                restart();
+                return;
             }
         }
     }

@@ -47,6 +47,10 @@ public class Player extends Entity {
         //TODO: Cuadrado de colisión: "menor al personaje, un 50% apróximadamente, interno a este"
         this.posX = 400;
         this.setPosition(new Vector2f(posX, 20));
+        
+         // TODO: harcoded dimensions
+        setWidth(32);
+        setHeight(32);
     }
     
     @Override
@@ -99,6 +103,8 @@ public class Player extends Entity {
 
     public void respawn() {
         //TODO: Hardcode respawn position
+        velX = 4;
+        velY = 0.098;
         this.setPosition(new Vector2f(400, 20));    
     }
     
