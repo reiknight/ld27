@@ -14,6 +14,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -44,7 +45,7 @@ public class MainState extends ManagedGameState {
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
         camera = new Camera();
-        tileMap = new TileMap(60, 30, C.Textures.TILE_SET.name, 32);
+        tileMap = new TileMap(200, 30, C.Textures.TILE_SET.name, 32);
 
         player = new Player();
         camera.follow(player);
@@ -72,7 +73,8 @@ public class MainState extends ManagedGameState {
         camera.update(gc, delta);
         
         checkEnemiesCollision(gc, game);
-                
+        checkPlayerCollision(gc, game);
+
         // Winning condition
         if (player.collideWithFloor(tileMap)) {
             gameOver(gc, game);
@@ -86,17 +88,8 @@ public class MainState extends ManagedGameState {
 
     void restart() {
         em.setGameState(C.States.MAIN_STATE.name);
-
-        player.respawn();
-        em.removeEntityGroup(C.Groups.ENEMIES.name);
-        em.forceRemoval();
-                
-        int i;
-        for (i = 0; i < nEnemies; i += 1) {
-            float x = new Random().nextFloat() * tileMap.getWidth() - tileMap.getTileSize();
-            float y = new Random().nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
-            em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
-        }
+        player.respawn();             
+        //initEnemies();
     }
     
     private void checkEnemiesCollision(GameContainer gc, StateBasedGame game) {
@@ -121,8 +114,32 @@ public class MainState extends ManagedGameState {
         }
     }
 
+    private void checkPlayerCollision(GameContainer gc, StateBasedGame game) {
+        float px = player.getX(), py = player.getY();
+        
+        if (px < 0) {
+            player.setPosition(new Vector2f(0, py));
+        } else {
+            if((px + player.getWidth()) > (tileMap.getX() + tileMap.getWidth())) {
+                player.setPosition(new Vector2f(tileMap.getX() + tileMap.getWidth() - player.getWidth(), py));
+            }
+        }
+    }
+    
     private void gameOver(GameContainer gc, StateBasedGame game) {
        ((GameOverState)game.getState(C.States.GAME_OVER_STATE.value)).setScore(player.getScore());
        game.enterState(C.States.GAME_OVER_STATE.value, new FadeOutTransition(), new FadeInTransition());
+    }
+
+    private void initEnemies() {
+        em.removeEntityGroup(C.Groups.ENEMIES.name);
+        em.forceRemoval();
+        
+        int i;
+        for (i = 0; i < nEnemies; i += 1) {
+            float x = new Random().nextFloat() * tileMap.getWidth() - tileMap.getTileSize();
+            float y = new Random().nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
+            em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
+        }
     }
 }
