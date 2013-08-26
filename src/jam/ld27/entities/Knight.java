@@ -25,15 +25,14 @@ public class Knight extends Entity {
     private double velX = 2;
     
     //Graphics
-    private int frame = 30;
-    private TileSet tileSet = new TileSet(C.Textures.TILE_SET.name, 
-            (Integer) C.Logic.TILE_SIZE.data);
+    private int frame = 1;
+    private TileSet tileSet = new TileSet(C.Textures.KNIGHT_SET.name, 128);
     
     public Knight(int height) {
         name = C.Entities.KNIGHT.name;
         group = C.Groups.KNIGHT.name;
         //TODO: Hardcoded height of sprite
-        posY = height - 32;
+        posY = height - 200;
         posX = 400;
         setPosition(new Vector2f(posX, posY));
     }
@@ -50,8 +49,8 @@ public class Knight extends Entity {
         if(Math.random() < .05 || posX > 600 || posX < 200) {
             direccion *= -1;
             switch(direccion) {
-                case 1: frame = 30; break;
-                case 2: frame = 31; break;
+                case 1: frame = 0; break;
+                case 2: frame = 1; break;
             }
         }
         posX += velX * direccion;
