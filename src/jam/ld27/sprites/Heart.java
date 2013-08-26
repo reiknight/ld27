@@ -2,36 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jam.ld27.entities;
+package jam.ld27.sprites;
 
-import jam.ld27.sprites.Player;
-import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.sounds.SoundManager;
 import jam.ld27.game.C;
-import jam.ld27.tilemap.TileSet;
 import java.util.Random;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
  *
  * @author Reik Val
  */
-public class Heart extends Entity {
+public class Heart extends Sprite {
     
     private double velY;
     private double velX = .5;
     private int type;
     private int countMovement = 0;
     private static Random r;
-    private TileSet tileSet = new TileSet(C.Textures.HEART.name, 
-            (Integer) C.Logic.TILE_SIZE.data);
     boolean active = true;
     
     private SoundManager sm = SoundManager.getInstance();
     
     public Heart() {
+        super(C.Textures.HEART.name, 32, 32, 256);
         name = C.Entities.HEART.name;
         group = C.Groups.HEARTS.name;
         
@@ -40,10 +37,10 @@ public class Heart extends Entity {
         }
         velY = -1*(r.nextInt(2)+1);
         type = r.nextInt(2);
-        
-        //TODO: Dimensions hardcode
-        setWidth(32);
-        setHeight(32);
+        addAnimation("heart", new int[]{type});
+        setAnimation("heart");
+
+        addBB(new Rectangle(0, 0, 32, 32));
     }
     
     public Heart(float x, float y) {
@@ -55,7 +52,6 @@ public class Heart extends Entity {
     public void render(GameContainer gc, Graphics g) {
         if(active) {
             super.render(gc, g);
-            tileSet.render(type, getX(), getY());
         }
     }
 

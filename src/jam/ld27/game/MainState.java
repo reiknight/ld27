@@ -4,7 +4,7 @@ import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
 import jam.ld27.sprites.Player;
-import jam.ld27.entities.Heart;
+import jam.ld27.sprites.Heart;
 import jam.ld27.entities.Initiator;
 import jam.ld27.sprites.Enemy;
 import jam.ld27.sprites.Knight;
