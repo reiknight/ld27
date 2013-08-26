@@ -152,7 +152,7 @@ public class MainState extends ManagedGameState {
     void restart() {
         em.setGameState(C.States.MAIN_STATE.name);
         player.respawn();
-        contador = 0;
+        contador = 601;
         initiator.setH(tileMap.getHeight());
         initiator.setFrames(0);
         camera.follow(initiator);
