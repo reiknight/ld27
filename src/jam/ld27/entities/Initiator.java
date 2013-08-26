@@ -15,11 +15,19 @@ import org.newdawn.slick.geom.Vector2f;
 public class Initiator extends Entity {
     private int heightMax;
     private int h;
+    private int frames;
     
     public Initiator(int heighMax) {
         this.heightMax = heighMax;
         this.h = heighMax;
+        this.frames = 0;
         this.setPosition(new Vector2f(400, heighMax));
+    }
+    
+    @Override
+    public void render(GameContainer gc, Graphics g) {
+        super.render(gc, g);
+        g.drawString(String.format("%.2f", frames/60f), 350, 0);
     }
 
     @Override
@@ -37,5 +45,12 @@ public class Initiator extends Entity {
         this.h = h;
     }
     
+    public int getFrames() {
+        return this.frames;
+    }
+    
+    public void setFrames(int frames) {
+        this.frames = frames;
+    }
     
 }
