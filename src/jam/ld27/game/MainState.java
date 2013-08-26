@@ -142,7 +142,8 @@ public class MainState extends ManagedGameState {
         initiator.setFrames(0);
         camera.follow(initiator);
         initEnemies();
-        initWalls();        
+        initWalls();   
+        initHearts();
     }
     
     private void checkEnemiesCollision(GameContainer gc, StateBasedGame game) {
