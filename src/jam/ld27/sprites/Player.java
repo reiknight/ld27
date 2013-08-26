@@ -35,7 +35,7 @@ public class Player extends Sprite {
     private double maxVelY = 5;
     
     //Graphics
-    private int crying = 180;
+    private int crying = 181;
 
     private int score;
     
@@ -90,7 +90,8 @@ public class Player extends Sprite {
             crying++;
         } else if(crying == 180) {
             setAnimation("falling");
-        } else {
+            crying++;
+        } else if(crying <= 180) {
             crying++;
         }
     }
