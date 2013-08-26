@@ -19,12 +19,14 @@ public class Enemy extends Sprite {
     private int direction = 1;
     
     public Enemy(float x, float y, String name) {
-        super(C.Textures.ENEMY.name, 72, 96, 256);
+        super(C.Textures.ENEMY.name, 80, 96, 256);
         this.name = name;
         group = C.Groups.ENEMIES.name;
         this.setPosition(new Vector2f(x, y));
-        addAnimation("flying", new int[]{0,1});
-        setAnimation("flying");
+        addAnimation("flying_right", new int[]{0,1});
+        addAnimation("flying_left", new int[]{3,4});
+        //TODO
+        setAnimation("flying_right");
         addBB(new Rectangle(17, 55, 45, 20));
         
         velX = (int) (256 + 100 * new Random().nextFloat());
