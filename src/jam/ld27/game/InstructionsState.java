@@ -39,15 +39,15 @@ public class InstructionsState extends ManagedGameState {
         g.drawString("press <SPACE> to back", 530, 50);
         g.drawString("Instructions", 100, 50);
         
-        g.drawString("You are the Zombie 0!", 100, 100);
-        g.drawString("Bite enemies and turn them to zombies.", 100, 115);
-        g.drawString("Bring humanity to the next evolution!", 100, 130);
+        g.drawString("You are a princess who was kidnapped by a drake!", 100, 100);
+        g.drawString("Memorize the sky and all the obstacles.", 100, 115);
+        g.drawString("The drake will let you fall in 10 SECONDS!", 100, 130);
         
-        g.drawString("Whatch out! You have 60 seconds before they escape!", 100, 169);
+        g.drawString("Whatch out! Your knight is waiting for you at bottom.", 100, 169);
+        g.drawString("Try to be catched by his hands for win the game.", 100, 184);
+        g.drawString("Take the hearts that your warrior is sending you for improve your score.", 100, 199);
         
-        
-        g.drawString("WASD: Movement", 100, 200);
-        g.drawString("Space: Bite enemy", 100, 215);
+        g.drawString("Arrow Right | Arrow Left: Movement", 100, 300);
         
         em.render(container, g);
     }
