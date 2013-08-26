@@ -38,7 +38,7 @@ public class MapGenerator {
         int posY = 0;
         int nWall = 0;
         
-        for(int i = 2*rows/difficulty; i < rows; i += rows/difficulty) {
+        for(int i = 2*rows/difficulty; i < rows - 2*rows/difficulty; i += rows/difficulty) {
             posX = r.nextInt(cols+2)-4;
             posY = r.nextInt(rows/difficulty) + i;
             
