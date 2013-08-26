@@ -3,12 +3,11 @@ package jam.ld27.game;
 import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
-import jam.ld27.entities.Enemy;
 import jam.ld27.sprites.Player;
 import jam.ld27.entities.Heart;
 import jam.ld27.entities.Initiator;
+import jam.ld27.sprites.Enemy;
 import jam.ld27.sprites.Knight;
-import jam.ld27.entities.Wall;
 import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
 import java.util.ArrayList;
@@ -61,6 +60,7 @@ public class MainState extends ManagedGameState {
         //Load Textures
         tm.addTexture(C.Textures.CASTLE.name, C.Textures.CASTLE.path);
         tm.addTexture(C.Textures.TILE_SET.name, C.Textures.TILE_SET.path);
+        tm.addTexture(C.Textures.ENEMY.name, C.Textures.ENEMY.path);
         tm.addTexture(C.Textures.KNIGHT_SET.name, C.Textures.KNIGHT_SET.path);
         tm.addTexture(C.Textures.PRINCESS_SET.name, C.Textures.PRINCESS_SET.path);
         tm.addTexture(C.Textures.HEART.name, C.Textures.HEART.path);
@@ -74,7 +74,8 @@ public class MainState extends ManagedGameState {
         player = new Player();
         knight = new Knight(tileMap.getHeight());
         initiator = new Initiator(tileMap.getHeight());
-        em.addEntity(C.Entities.HEART.name(), new Heart(400, 800));
+        em.addEntity(C.Entities.HEART.name, new Heart(400, 800));
+        em.addEntity(C.Entities.ENEMY.name+"yoshi=motherfucker", new jam.ld27.sprites.Enemy(400, 400, C.Entities.ENEMY.name+"yoshi=motherfucker"));
         em.addEntity(C.Entities.PLAYER.name, player);     
         em.addEntity(C.Entities.KNIGHT.name, knight);
     }
@@ -146,6 +147,7 @@ public class MainState extends ManagedGameState {
         camera.follow(initiator);
         
         initEnemies();
+        em.addEntity(C.Entities.ENEMY.name+"yoshi=motherfucker", new jam.ld27.sprites.Enemy(400, 400, C.Entities.ENEMY.name+"yoshi=motherfucker"));
         initWalls();   
         initHearts();
     }
@@ -153,7 +155,6 @@ public class MainState extends ManagedGameState {
     private void checkEnemiesCollision(GameContainer gc, StateBasedGame game, int delta) {
         ArrayList<Entity> enemies = (ArrayList<Entity>) em.getEntityGroup(C.Groups.ENEMIES.name);
         Iterator it = enemies.iterator();
-        Shape playerBB = player.getR();
         
         while(it.hasNext()) {
             Enemy enemy = (Enemy) it.next();
@@ -164,7 +165,7 @@ public class MainState extends ManagedGameState {
                 enemy.changeDirection();
             }
             
-            if (enemy.getR().intersects(playerBB)){
+            if (enemy.collideWith(player)){
                 player.die();
                 return;
             }
@@ -221,7 +222,7 @@ public class MainState extends ManagedGameState {
         for (i = 0; i < nEnemies; i += 1) {
             float x = r.nextFloat() * (tileMap.getWidth() - tileMap.getTileSize());
             float y = r.nextFloat() * (tileMap.getHeight() - tileMap.getTileSize());
-            em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
+            em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y, C.Entities.ENEMY.name + i));
         }
     }
     

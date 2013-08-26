@@ -45,7 +45,7 @@ public class C {
         KNIGHT_SET("knight_set", "resources/textures/knight_set.png"),
         PRINCESS_SET("princess_set", "resources/textures/princess_set.png"),
         LOGO("logo", "resources/textures/logo.png"),
-        ENEMY("enemy", "resources/textures/enemy.png"),
+        ENEMY("enemy", "resources/textures/birds.png"),
         CASTLE("castle", "resources/textures/castillo.png"),
         HEART("heart", "resources/textures/hearts.png");
 

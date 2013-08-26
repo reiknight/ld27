@@ -1,10 +1,7 @@
 package jam.ld27.sprites;
 
-import infinitedog.frisky.entities.Entity;
 import jam.ld27.game.C;
-import jam.ld27.tilemap.TileSet;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
