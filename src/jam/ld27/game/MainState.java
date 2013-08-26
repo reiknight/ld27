@@ -105,7 +105,7 @@ public class MainState extends ManagedGameState {
             checkEnemiesCollision(gc, game);
             checkPlayerCollision(gc, game);
 
-            if (player.isDead() || player.collideWithFloor(tileMap)) {
+            if (player.isDead() || player.isSaved()) {
                 gameOver(gc, game);
             }
 
@@ -196,6 +196,12 @@ public class MainState extends ManagedGameState {
             if(heart.isActive()) {
                 heart.checkCollision(player);
             }
+        }
+        
+        if (player.getR().intersects(knight.getR())) {
+            player.saved();
+        } else if (player.collideWithFloor(tileMap)) {
+            player.die();
         }
     }
     

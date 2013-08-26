@@ -46,6 +46,7 @@ public class Player extends Entity {
     private int score;
     
     private boolean dead;
+    private boolean saved;
     
     public Player() {
         name = C.Entities.PLAYER.name;
@@ -145,6 +146,14 @@ public class Player extends Entity {
     
     public boolean isDead() {
         return dead;
+    }
+
+    public void saved() {
+        saved = true;
+    }
+    
+    public boolean isSaved() {
+        return saved;
     }
     
 }
