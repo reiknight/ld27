@@ -18,7 +18,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class StartState extends ManagedGameState {
     private Image background;
-    private Button button_start, button_instructions, button_credits;
+    private Button button_start, button_story, button_instructions, button_credits;
     private Button button_easy, button_normal, button_hard;
     private boolean choosingDificulty = false;
     
@@ -45,6 +45,7 @@ public class StartState extends ManagedGameState {
         tm.addTexture(C.Textures.BUTTON_EASY.name, C.Textures.BUTTON_EASY.path);
         tm.addTexture(C.Textures.BUTTON_NORMAL.name, C.Textures.BUTTON_NORMAL.path);
         tm.addTexture(C.Textures.BUTTON_HARD.name, C.Textures.BUTTON_HARD.path);
+        tm.addTexture(C.Textures.STORY.name, C.Textures.STORY.path);
         tm.addTexture(C.Textures.CROSSHAIR.name, C.Textures.CROSSHAIR.path);
         
         //Load entities
@@ -52,6 +53,11 @@ public class StartState extends ManagedGameState {
                 "button_start", C.Groups.BUTTONS.name,
                 C.Buttons.START_GAME.label, C.Buttons.START_GAME.labelPosition);
         button_start.setPosition(C.Buttons.START_GAME.position);
+        
+        button_story = new Button(C.Buttons.STORY.textureName,
+                "button_story", C.Groups.BUTTONS.name,
+                C.Buttons.STORY.label, C.Buttons.STORY.labelPosition);
+        button_story.setPosition(C.Buttons.STORY.position);
         
         button_instructions = new Button(C.Buttons.INSTRUCTIONS.textureName,
                 "button_instructions", C.Groups.BUTTONS.name,
@@ -96,6 +102,7 @@ public class StartState extends ManagedGameState {
             button_hard.render(gc, g);
         } else {
             button_start.render(gc, g);
+            button_story.render(gc, g);
             button_credits.render(gc, g);
             button_instructions.render(gc, g);
         }
@@ -139,10 +146,17 @@ public class StartState extends ManagedGameState {
                 else if(pm.testCollisionsEntity(crosshair, button_credits)) {
                     game.enterState(C.States.CREDITS_STATE.value, new FadeOutTransition(), new FadeInTransition());
                 }
+                else if(pm.testCollisionsEntity(crosshair, button_story)) {
+                    game.enterState(C.States.STORY_STATE.value, new FadeOutTransition(), new FadeInTransition());
+                }
             }
         }
         if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
-            gc.exit();
+            if(choosingDificulty) {
+                choosingDificulty = false;
+            } else {
+                gc.exit();
+            }
         }
     }   
 }
