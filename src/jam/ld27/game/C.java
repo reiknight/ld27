@@ -47,6 +47,7 @@ public class C {
         CONCRETE_WALL_SET("concrete_wall_set", "resources/textures/concrete_wall_set.png"),
         FRAGILE_WALL_SET("fragile_wall_set", "resources/textures/fragile_wall_set.png"),
         BLOWING_WALL_SET("blowing_wall_set", "resources/textures/blowing_wall_set.png"),
+        DRAGON_SET("dragon_set", "resources/textures/dragon_set.png"),
         LOGO("logo", "resources/textures/logo.png"),
         ENEMY("enemy", "resources/textures/birds.png"),
         CASTLE("castle", "resources/textures/castillo.png"),
@@ -68,6 +69,7 @@ public class C {
         CROSSHAIR("crosshair"),
         ENEMY("enemy"),
         HEART("heart"),
+        DRAGON("dragon"),
         WALL("wall");
 
         public String name;
@@ -85,6 +87,7 @@ public class C {
         BUTTONS("buttons"),
         ENEMIES("enemies"),
         HEARTS("hearts"),
+        DRAGONS("dragons"),
         WALLS("walls");
 
         public String name;
