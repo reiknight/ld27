@@ -34,7 +34,7 @@ public class MainState extends ManagedGameState {
     private Camera camera;
     //Generation of enemies and hearts.
     private int nEnemies = 10;
-    private int nHearts = 10;
+    private int nHearts = 50;
     private Random r = new Random();
     //Animation
     private int contador = 0;
@@ -103,7 +103,7 @@ public class MainState extends ManagedGameState {
             evm.update(gc, delta);
             camera.update(gc, delta);
 
-            checkEnemiesCollision(gc, game);
+            checkEnemiesCollision(gc, game, delta);
             checkPlayerCollision(gc, game);
 
             if (player.isDead() || player.isSaved()) {
@@ -149,14 +149,14 @@ public class MainState extends ManagedGameState {
         initHearts();
     }
     
-    private void checkEnemiesCollision(GameContainer gc, StateBasedGame game) {
+    private void checkEnemiesCollision(GameContainer gc, StateBasedGame game, int delta) {
         ArrayList<Entity> enemies = (ArrayList<Entity>) em.getEntityGroup(C.Groups.ENEMIES.name);
         Iterator it = enemies.iterator();
         Shape playerBB = player.getR();
         
         while(it.hasNext()) {
             Enemy enemy = (Enemy) it.next();
-            float x = enemy.getX();
+            float x = enemy.getNextStep(delta);
             float width = enemy.getWidth();
             
             if ((x + width) > (tileMap.getX() + tileMap.getWidth()) || (x < 0)) {

@@ -17,7 +17,7 @@ public class BlowingWall extends Wall {
         
         //TODO: ultra hardcoded
         frame = 4;
-        int[][] cb = new int[2][25];
+        int[][] cb = new int[2][12];
         for(int i = 0; i < cb.length; i++) {
             for(int j = 0; j < cb[i].length; j++) {
                 cb[i][j] = 1;
