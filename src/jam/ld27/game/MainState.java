@@ -110,9 +110,6 @@ public class MainState extends ManagedGameState {
                 gameOver(gc, game);
             }
 
-            if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
-                gc.exit();
-            }
             em.update(gc, delta);
         } else if(contador == 601) {
             contador++;
@@ -121,6 +118,10 @@ public class MainState extends ManagedGameState {
             contador++;
             initiator.update(gc, delta);
             camera.update(gc, delta);
+        }
+        
+        if(evm.isHappening(C.Events.CLOSE_WINDOW.name, gc)) {
+            gc.exit();
         }
         
         if(evm.isHappening(C.Events.SOUND_OFF.name, gc)) {

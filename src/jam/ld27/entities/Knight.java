@@ -35,6 +35,8 @@ public class Knight extends Entity {
         posY = height - 200;
         posX = 400;
         setPosition(new Vector2f(posX, posY));
+        setWidth(128);
+        setHeight(128);
     }
 
     @Override
