@@ -141,6 +141,7 @@ public class MainState extends ManagedGameState {
         initiator.setH(tileMap.getHeight());
         initiator.setFrames(0);
         camera.follow(initiator);
+        
         initEnemies();
         initWalls();   
         initHearts();
@@ -209,8 +210,8 @@ public class MainState extends ManagedGameState {
         
         int i;
         for (i = 0; i < nEnemies; i += 1) {
-            float x = r.nextFloat() * tileMap.getWidth() - tileMap.getTileSize();
-            float y = r.nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
+            float x = r.nextFloat() * (tileMap.getWidth() - tileMap.getTileSize());
+            float y = r.nextFloat() * (tileMap.getHeight() - tileMap.getTileSize());
             em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
         }
     }
