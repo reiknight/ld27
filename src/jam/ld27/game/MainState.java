@@ -166,6 +166,7 @@ public class MainState extends ManagedGameState {
         initiator.setH(tileMap.getHeight());
         initiator.setFrames(0);
         camera.follow(initiator);
+        knight.setFrame(0);
         
         initEnemies();
         initWalls();   
