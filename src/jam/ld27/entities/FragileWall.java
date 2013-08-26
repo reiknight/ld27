@@ -14,7 +14,6 @@ public class FragileWall extends Wall {
     @Override
     void reactionToCollisionWithPlayer(Player player) {
         //TODO: ultra hardcoded
-        player.setScore(player.getScore() - 200);
         player.setVelY(player.getVelY() / 2);
     }
 
