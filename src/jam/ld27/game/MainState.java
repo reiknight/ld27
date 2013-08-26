@@ -7,6 +7,7 @@ import jam.ld27.entities.Enemy;
 import jam.ld27.entities.Player;
 import jam.ld27.entities.Heart;
 import jam.ld27.entities.Initiator;
+import jam.ld27.entities.Knight;
 import jam.ld27.entities.Wall;
 import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
@@ -28,6 +29,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class MainState extends ManagedGameState {
     private boolean paused = false;
     private Player player;
+    private Knight knight;
     private TileMap tileMap;
     private Camera camera;
     //Generation of enemies and hearts.
@@ -68,9 +70,11 @@ public class MainState extends ManagedGameState {
         tileMap = new TileMap(200, 25, C.Textures.TILE_SET.name, 32);
         camera = new Camera(tileMap);
         player = new Player();
+        knight = new Knight(tileMap.getHeight());
         initiator = new Initiator(tileMap.getHeight());
         em.addEntity(C.Entities.HEART.name(), new Heart(400, 800));
         em.addEntity(C.Entities.PLAYER.name, player);     
+        em.addEntity(C.Entities.KNIGHT.name, knight);
     }
     
     @Override
@@ -135,6 +139,7 @@ public class MainState extends ManagedGameState {
         player.respawn();
         contador = 0;
         initiator.setH(tileMap.getHeight());
+        initiator.setFrames(0);
         camera.follow(initiator);
         initEnemies();
         initWalls();        
@@ -217,7 +222,7 @@ public class MainState extends ManagedGameState {
             float x = r.nextFloat() * (tileMap.getWidth() - tileMap.getTileSize());
             float frac = (tileMap.getHeight() - tileMap.getTileSize())/nHearts;
             float y = r.nextFloat() * frac + i*frac;
-            em.addEntity(C.Entities.HEART.name + i, new Heart(x, y);
+            em.addEntity(C.Entities.HEART.name + i, new Heart(x, y));
         }
     }
     

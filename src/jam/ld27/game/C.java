@@ -58,6 +58,7 @@ public class C {
 
     public static enum Entities {
         PLAYER("player"),
+        KNIGHT("knight"),
         ZOMBIE("zombie"),
         CROSSHAIR("crosshair"),
         ENEMY("enemy"),
@@ -73,6 +74,7 @@ public class C {
 
     public static enum Groups {
         PLAYER("player"),
+        KNIGHT("knight"),
         BULLETS("bullets"),
         ZOMBIES("zombies"),
         BUTTONS("buttons"),

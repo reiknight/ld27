@@ -6,6 +6,7 @@ package jam.ld27.entities;
 
 import infinitedog.frisky.entities.Entity;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
@@ -34,6 +35,7 @@ public class Initiator extends Entity {
     public void update(GameContainer gc, int delta) {
         super.update(gc, delta);
         h -= heightMax/600;
+        frames++;
         this.setPosition(new Vector2f(400, h));
     }
 
