@@ -168,8 +168,10 @@ public class MainState extends ManagedGameState {
                 enemy.changeDirection();
             }
             
-            if (enemy.collideWith(player)){
-                player.die();
+            if (enemy.isActive() && enemy.collideWith(player)){
+                player.lossHp();
+                player.setCrying(0);
+                enemy.setActive(false);
                 return;
             }
         }

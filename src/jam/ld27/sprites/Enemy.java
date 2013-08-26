@@ -17,6 +17,7 @@ import org.newdawn.slick.geom.Vector2f;
 public class Enemy extends Sprite {
     private int velX, velY;
     private int direction = 1;
+    private boolean active = true;
     
     public Enemy(float x, float y, String name) {
         super(C.Textures.ENEMY.name, 80, 96, 256);
@@ -38,7 +39,7 @@ public class Enemy extends Sprite {
         float x = getNextStep(delta);
         float y = (float) Math.ceil(getY() + velY * ((float) delta / 1000));
         setPosition(new Vector2f(x, y));
-    }
+        }
     
     public float getNextStep(int delta) {
         return (float) Math.ceil(getX() + direction * velX * ((float) delta / 1000));
@@ -55,4 +56,13 @@ public class Enemy extends Sprite {
                 break;
         }
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
 }

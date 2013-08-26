@@ -23,7 +23,7 @@ import org.newdawn.slick.geom.Vector2f;
 public class Player extends Sprite {
     //Position
     private byte direccion = 0;
-            
+    private byte hp = 2;
     //Movement
     private double velX = 4;
     private double velY = 2;
@@ -35,7 +35,7 @@ public class Player extends Sprite {
     private double maxVelY = 5;
     
     //Graphics
-    private int frame = 0;
+    private int crying = 120;
 
 
     private int score;
@@ -50,6 +50,7 @@ public class Player extends Sprite {
         
         addAnimation("falling", new int[]{0,1});
         setAnimation("falling");
+        addAnimation("crying", new int[]{1,2});
         
         addBB(new Rectangle(44, 15, 69, 137));
         addBB(new Rectangle(15, 87, 131, 33));
@@ -79,6 +80,14 @@ public class Player extends Sprite {
         modX = 0;
         //Setting the character:
         this.setPosition(new Vector2f(x,y));
+        if(crying == 0) {
+            setAnimation("crying");
+            crying++;
+        } else if(crying == 180) {
+            setAnimation("falling");
+        } else {
+            crying++;
+        }
     }
     
     /**
@@ -106,6 +115,7 @@ public class Player extends Sprite {
         //TODO: Hardcode respawn position
         velX = 4;
         velY = 0.098;
+        hp = 2;
         this.setPosition(new Vector2f(400, 0));    
     }
 
@@ -149,6 +159,21 @@ public class Player extends Sprite {
 
     public void setModX(double modX) {
         this.modX = modX;
+    }
+    
+    public void lossHp() {
+        hp --;
+        if(hp <= 0) {
+            die();
+        }
+    }
+
+    public int getCrying() {
+        return crying;
+    }
+
+    public void setCrying(int crying) {
+        this.crying = crying;
     }
     
 }
