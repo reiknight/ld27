@@ -8,6 +8,7 @@ import jam.ld27.entities.Heart;
 import jam.ld27.entities.Initiator;
 import jam.ld27.sprites.Enemy;
 import jam.ld27.sprites.Knight;
+import jam.ld27.sprites.Wall;
 import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
 import java.util.ArrayList;
@@ -63,6 +64,9 @@ public class MainState extends ManagedGameState {
         tm.addTexture(C.Textures.ENEMY.name, C.Textures.ENEMY.path);
         tm.addTexture(C.Textures.KNIGHT_SET.name, C.Textures.KNIGHT_SET.path);
         tm.addTexture(C.Textures.PRINCESS_SET.name, C.Textures.PRINCESS_SET.path);
+        tm.addTexture(C.Textures.CONCRETE_WALL_SET.name, C.Textures.CONCRETE_WALL_SET.path);
+        tm.addTexture(C.Textures.FRAGILE_WALL_SET.name, C.Textures.FRAGILE_WALL_SET.path);
+        tm.addTexture(C.Textures.BLOWING_WALL_SET.name, C.Textures.BLOWING_WALL_SET.path);
         tm.addTexture(C.Textures.HEART.name, C.Textures.HEART.path);
         //Load Sounds
         sm.addMusic(C.Sounds.MUSIC.name, C.Sounds.MUSIC.path);
@@ -147,7 +151,6 @@ public class MainState extends ManagedGameState {
         camera.follow(initiator);
         
         initEnemies();
-        em.addEntity(C.Entities.ENEMY.name+"yoshi=motherfucker", new jam.ld27.sprites.Enemy(400, 400, C.Entities.ENEMY.name+"yoshi=motherfucker"));
         initWalls();   
         initHearts();
     }
@@ -183,11 +186,11 @@ public class MainState extends ManagedGameState {
             }
         }
         
-       /* ArrayList<Entity> walls = (ArrayList<Entity>) em.getEntityGroup(C.Groups.WALLS.name);
+        ArrayList<Entity> walls = (ArrayList<Entity>) em.getEntityGroup(C.Groups.WALLS.name);
         Iterator it = walls.iterator();
         while(it.hasNext()) {
             Wall wall = (Wall) it.next();
-            if (wall.checkCollisionWithPlayer(player)) {
+            if (wall.collideWith(player)) {
                 if (wall.isDestroyable()) {
                     em.removeEntity(wall.getName());
                 }
@@ -200,7 +203,7 @@ public class MainState extends ManagedGameState {
             if(heart.isActive()) {
                 heart.checkCollision(player);
             }
-        }*/
+        }
         
         if (player.collideWith(knight)) {
             player.saved();

@@ -5,9 +5,9 @@
 package jam.ld27.tilemap;
 
 import infinitedog.frisky.entities.EntityManager;
-import jam.ld27.entities.BlowingWall;
-import jam.ld27.entities.ConcreteWall;
-import jam.ld27.entities.FragileWall;
+import jam.ld27.sprites.BlowingWall;
+import jam.ld27.sprites.ConcreteWall;
+import jam.ld27.sprites.FragileWall;
 import jam.ld27.game.C;
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,15 +48,15 @@ public class MapGenerator {
             switch(wallType) {
                 case 0:
                     entityManager.addEntity(C.Entities.WALL.name + nWall, 
-                            new ConcreteWall(posX * 32, posY * 32, C.Textures.TILE_SET.name, 32));
+                            new ConcreteWall(C.Entities.WALL.name + nWall, posX * 32, posY * 32));
                     break;
                 case 1:
                     entityManager.addEntity(C.Entities.WALL.name + nWall,
-                            new FragileWall(posX * 32, posY * 32, C.Textures.TILE_SET.name, 32));
+                            new FragileWall(C.Entities.WALL.name + nWall, posX * 32, posY * 32));
                     break;
                 case 2:
                     entityManager.addEntity(C.Entities.WALL.name + nWall,
-                             new BlowingWall(posX * 32, posY * 32, C.Textures.TILE_SET.name, 32));
+                            new BlowingWall(C.Entities.WALL.name + nWall, posX * 32, posY * 32));
                     break;
             }
             
