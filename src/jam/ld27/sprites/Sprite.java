@@ -41,7 +41,7 @@ public class Sprite extends Entity {
     public void render(GameContainer gc, Graphics g) {
         super.render(gc, g);
         tileSet.render(currentFrame, getX(), getY());
-        drawBB(g);
+        //drawBB(g);
     }
     
     @Override
