@@ -6,6 +6,7 @@ import infinitedog.frisky.game.ManagedGameState;
 import jam.ld27.sprites.Player;
 import jam.ld27.sprites.Heart;
 import jam.ld27.entities.Initiator;
+import jam.ld27.sprites.Dragon;
 import jam.ld27.sprites.Enemy;
 import jam.ld27.sprites.Knight;
 import jam.ld27.sprites.Wall;
@@ -32,6 +33,7 @@ public class MainState extends ManagedGameState {
     private Knight knight;
     private TileMap tileMap;
     private Camera camera;
+    private Dragon dragon;
     //Generation of enemies and hearts.
     private int nEnemies = 10;
     private int nHearts = 50;
@@ -67,6 +69,7 @@ public class MainState extends ManagedGameState {
         tm.addTexture(C.Textures.CONCRETE_WALL_SET.name, C.Textures.CONCRETE_WALL_SET.path);
         tm.addTexture(C.Textures.FRAGILE_WALL_SET.name, C.Textures.FRAGILE_WALL_SET.path);
         tm.addTexture(C.Textures.BLOWING_WALL_SET.name, C.Textures.BLOWING_WALL_SET.path);
+        tm.addTexture(C.Textures.DRAGON_SET.name, C.Textures.DRAGON_SET.path);
         tm.addTexture(C.Textures.HEART.name, C.Textures.HEART.path);
         //Load Sounds
         sm.addMusic(C.Sounds.MUSIC.name, C.Sounds.MUSIC.path);
@@ -82,6 +85,8 @@ public class MainState extends ManagedGameState {
         em.addEntity(C.Entities.ENEMY.name+"yoshi=motherfucker", new jam.ld27.sprites.Enemy(400, 400, C.Entities.ENEMY.name+"yoshi=motherfucker"));
         em.addEntity(C.Entities.PLAYER.name, player);     
         em.addEntity(C.Entities.KNIGHT.name, knight);
+        
+        dragon = new Dragon();
     }
     
     @Override
@@ -99,6 +104,7 @@ public class MainState extends ManagedGameState {
         g.drawString("Score: " + player.getScore(), 0, 0);
         if(contador <= 601) {
             initiator.render(gc, g);
+            dragon.render(gc, g);
         }
     }
 
@@ -123,6 +129,7 @@ public class MainState extends ManagedGameState {
         } else {
             contador++;
             initiator.update(gc, delta);
+            dragon.update(gc, delta);
             camera.update(gc, delta);
         }
         
