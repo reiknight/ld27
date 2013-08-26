@@ -38,23 +38,23 @@ public class MapGenerator {
         int posY = 0;
         int nWall = 0;
         
-        for(int i = 0; i < rows; i += rows/difficulty) {
+        for(int i = 2*rows/difficulty; i < rows; i += rows/difficulty) {
             posX = r.nextInt(cols+2)-4;
             posY = r.nextInt(rows/difficulty) + i;
             
             // TODO: hardcoded number of wall Types
-            int wallType = r.nextInt(3);
+            int wallType = r.nextInt(10);
             
             switch(wallType) {
                 case 0:
                     entityManager.addEntity(C.Entities.WALL.name + nWall, 
                             new ConcreteWall(C.Entities.WALL.name + nWall, posX * 32, posY * 32));
                     break;
-                case 1:
+                case 1: case 2: case 3: case 4:
                     entityManager.addEntity(C.Entities.WALL.name + nWall,
                             new FragileWall(C.Entities.WALL.name + nWall, posX * 32, posY * 32));
                     break;
-                case 2:
+                case 5: case 6:
                     entityManager.addEntity(C.Entities.WALL.name + nWall,
                             new BlowingWall(C.Entities.WALL.name + nWall, posX * 32, posY * 32));
                     break;

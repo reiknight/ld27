@@ -115,17 +115,17 @@ public class StartState extends ManagedGameState {
                                 
             if (choosingDificulty) {
                 if(pm.testCollisionsEntity(crosshair, button_easy)) {
-                    ((MainState)game.getState(C.States.MAIN_STATE.value)).setDifficulty(25);
+                    ((MainState)game.getState(C.States.MAIN_STATE.value)).setDifficulty(10);
                     ((MainState)game.getState(C.States.MAIN_STATE.value)).restart();
                     game.enterState(C.States.MAIN_STATE.value, new FadeOutTransition(), new FadeInTransition());
                 }
                 else if(pm.testCollisionsEntity(crosshair, button_normal)) {
-                    ((MainState)game.getState(C.States.MAIN_STATE.value)).setDifficulty(50);
+                    ((MainState)game.getState(C.States.MAIN_STATE.value)).setDifficulty(25);
                     ((MainState)game.getState(C.States.MAIN_STATE.value)).restart();
                     game.enterState(C.States.MAIN_STATE.value, new FadeOutTransition(), new FadeInTransition());
                 }
                 else if(pm.testCollisionsEntity(crosshair, button_hard)) {            
-                    ((MainState)game.getState(C.States.MAIN_STATE.value)).setDifficulty(100);
+                    ((MainState)game.getState(C.States.MAIN_STATE.value)).setDifficulty(50);
                     ((MainState)game.getState(C.States.MAIN_STATE.value)).restart();
                     game.enterState(C.States.MAIN_STATE.value, new FadeOutTransition(), new FadeInTransition());
                 }   

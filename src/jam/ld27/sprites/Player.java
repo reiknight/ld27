@@ -26,7 +26,7 @@ public class Player extends Sprite {
             
     //Movement
     private double velX = 4;
-    private double velY = 0.098;
+    private double velY = 2;
     private double modX = 0;
     
     //Gravity mode
