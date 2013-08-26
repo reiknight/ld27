@@ -44,6 +44,9 @@ public class MainState extends ManagedGameState {
     
     private int difficulty;
     private boolean musicOn = false;
+    
+    private boolean ending = false;
+    private int endingTimer = 0;
         
     public MainState(int stateID)
     {
@@ -112,17 +115,24 @@ public class MainState extends ManagedGameState {
     public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
         em.setGameState(C.States.MAIN_STATE.name);
         if(contador > 601) {
-            evm.update(gc, delta);
-            camera.update(gc, delta);
+            if (ending) {
+                endingTimer += delta;
+                if (endingTimer > 1500) {
+                    gameOver(gc, game);
+                }
+            } else {
+                evm.update(gc, delta);
+                camera.update(gc, delta);
+                
+                checkEnemiesCollision(gc, game, delta);
+                checkPlayerCollision(gc, game);
 
-            checkEnemiesCollision(gc, game, delta);
-            checkPlayerCollision(gc, game);
+                if (player.isDead()) {
+                    gameOver(gc, game);
+                }
 
-            if (player.isDead() || player.isSaved()) {
-                gameOver(gc, game);
+                em.update(gc, delta);
             }
-
-            em.update(gc, delta);
         } else if(contador == 601) {
             contador++;
             camera.follow(player);
@@ -216,6 +226,9 @@ public class MainState extends ManagedGameState {
         
         if (player.collideWith(knight)) {
             player.saved();
+            ending = true;
+            knight.setFrame(2);
+            knight.stopAnimation();
         } else if (player.collideWithFloor(tileMap)) {
             player.die();
         }

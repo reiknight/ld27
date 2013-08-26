@@ -58,7 +58,7 @@ public class Player extends Sprite {
     
     @Override
     public void render(GameContainer gc, Graphics g) {
-        if (crying > 180 || crying % 2 == 0) {
+        if ((crying > 180 || crying % 2 == 0) && !saved) {
             super.render(gc, g);
         }
     }

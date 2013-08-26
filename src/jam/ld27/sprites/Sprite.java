@@ -56,6 +56,14 @@ public class Sprite extends Entity {
         }
     }
     
+    public void setFrame(int frame) {
+        currentFrame = frame;
+    }
+    
+    public void stopAnimation() {
+        currentAnimation = null;
+    }
+    
     public void addAnimation(String name, int[] frames) {
         animations.put(name, frames);
     }
