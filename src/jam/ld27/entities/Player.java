@@ -28,6 +28,7 @@ public class Player extends Entity {
     //Movement
     private double velX = 4;
     private double velY = 0.098;
+    private double modX = 0;
     
     //Gravity mode
     private boolean gravityActive = true;
@@ -79,7 +80,8 @@ public class Player extends Entity {
         movement(gc);
         //Velocity of the character:
         y += Math.ceil(velY);
-        x += Math.ceil(direccion*velX);
+        x += Math.ceil(direccion*velX) + modX;
+        modX = 0;
         //Setting the character:
         this.setPosition(new Vector2f(x,y));
     }
@@ -154,6 +156,14 @@ public class Player extends Entity {
     
     public boolean isSaved() {
         return saved;
+    }
+
+    public double getModX() {
+        return modX;
+    }
+
+    public void setModX(double modX) {
+        this.modX = modX;
     }
     
 }
