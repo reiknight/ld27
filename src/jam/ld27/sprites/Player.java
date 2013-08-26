@@ -35,8 +35,7 @@ public class Player extends Sprite {
     private double maxVelY = 5;
     
     //Graphics
-    private int crying = 120;
-
+    private int crying = 180;
 
     private int score;
     
@@ -49,13 +48,19 @@ public class Player extends Sprite {
         group = C.Groups.PLAYER.name;
         
         addAnimation("falling", new int[]{0,1});
-        setAnimation("falling");
         addAnimation("crying", new int[]{1,2});
         
         addBB(new Rectangle(44, 15, 69, 137));
         addBB(new Rectangle(15, 87, 131, 33));
         
         respawn();
+    }
+    
+    @Override
+    public void render(GameContainer gc, Graphics g) {
+        if ((crying > 180 || crying % 2 == 0) && !saved) {
+            super.render(gc, g);
+        }
     }
     
     @Override
@@ -116,6 +121,8 @@ public class Player extends Sprite {
         velX = 4;
         velY = 0.098;
         hp = 2;
+        crying = 180;
+        setAnimation("falling");
         this.setPosition(new Vector2f(400, 0));    
     }
 
