@@ -201,7 +201,7 @@ public class MainState extends ManagedGameState {
             }
         }*/
         
-        if (player.getR().intersects(knight.getR())) {
+        if (player.collideWith(knight)) {
             player.saved();
         } else if (player.collideWithFloor(tileMap)) {
             player.die();

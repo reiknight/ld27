@@ -13,6 +13,7 @@ import jam.ld27.tilemap.TileMap;
 import jam.ld27.tilemap.TileSet;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
@@ -48,7 +49,10 @@ public class Player extends Sprite {
         
         addAnimation("falling", new int[]{0,1});
         setAnimation("falling");
-                
+        
+        addBB(new Rectangle(44, 15, 69, 137));
+        addBB(new Rectangle(15, 87, 131, 33));
+        
         respawn();
     }
     

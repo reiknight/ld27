@@ -5,6 +5,7 @@ import jam.ld27.game.C;
 import jam.ld27.tilemap.TileSet;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Knight extends Sprite {    
@@ -16,6 +17,10 @@ public class Knight extends Sprite {
         super(C.Textures.KNIGHT_SET.name, 128, 128, 256);
         name = C.Entities.KNIGHT.name;
         group = C.Groups.KNIGHT.name;
+        
+        addBB(new Rectangle(46, 5, 37, 121));
+        addBB(new Rectangle(23, 32, 83, 32));
+        
         setPosition(new Vector2f(400, height - 200));
     }
 
