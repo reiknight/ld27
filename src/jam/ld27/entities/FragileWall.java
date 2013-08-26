@@ -1,5 +1,7 @@
 package jam.ld27.entities;
 
+import jam.ld27.sprites.Player;
+
 public class FragileWall extends Wall {
 
     public FragileWall(float x, float y, String textureFileName, int ts) {

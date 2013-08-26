@@ -1,5 +1,7 @@
 package jam.ld27.entities;
 
+import jam.ld27.sprites.Player;
+
 public class ConcreteWall extends Wall {
 
     public ConcreteWall(float x, float y, String textureFileName, int ts) {

@@ -1,5 +1,6 @@
 package jam.ld27.entities;
 
+import jam.ld27.sprites.Player;
 import infinitedog.frisky.entities.Entity;
 import jam.ld27.game.C;
 import jam.ld27.tilemap.TileSet;

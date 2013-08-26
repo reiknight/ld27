@@ -4,6 +4,7 @@
  */
 package jam.ld27.entities;
 
+import jam.ld27.sprites.Player;
 import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.sounds.SoundManager;
 import jam.ld27.game.C;

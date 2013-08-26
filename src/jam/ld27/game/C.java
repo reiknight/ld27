@@ -43,6 +43,7 @@ public class C {
         WALL("wall", "resources/textures/wall.png"),
         TILE_SET("tile_set", "resources/textures/tile_set.png"),
         KNIGHT_SET("knight_set", "resources/textures/knight_set.png"),
+        PRINCESS_SET("princess_set", "resources/textures/princess_set.png"),
         LOGO("logo", "resources/textures/logo.png"),
         ENEMY("enemy", "resources/textures/enemy.png"),
         CASTLE("castle", "resources/textures/castillo.png"),

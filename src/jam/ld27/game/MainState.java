@@ -4,10 +4,10 @@ import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
 import jam.ld27.entities.Enemy;
-import jam.ld27.entities.Player;
+import jam.ld27.sprites.Player;
 import jam.ld27.entities.Heart;
 import jam.ld27.entities.Initiator;
-import jam.ld27.entities.Knight;
+import jam.ld27.sprites.Knight;
 import jam.ld27.entities.Wall;
 import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
@@ -62,6 +62,7 @@ public class MainState extends ManagedGameState {
         tm.addTexture(C.Textures.CASTLE.name, C.Textures.CASTLE.path);
         tm.addTexture(C.Textures.TILE_SET.name, C.Textures.TILE_SET.path);
         tm.addTexture(C.Textures.KNIGHT_SET.name, C.Textures.KNIGHT_SET.path);
+        tm.addTexture(C.Textures.PRINCESS_SET.name, C.Textures.PRINCESS_SET.path);
         tm.addTexture(C.Textures.HEART.name, C.Textures.HEART.path);
         //Load Sounds
         sm.addMusic(C.Sounds.MUSIC.name, C.Sounds.MUSIC.path);
@@ -139,7 +140,7 @@ public class MainState extends ManagedGameState {
     void restart() {
         em.setGameState(C.States.MAIN_STATE.name);
         player.respawn();
-        contador = 0;
+        contador = 601;
         initiator.setH(tileMap.getHeight());
         initiator.setFrames(0);
         camera.follow(initiator);
@@ -181,7 +182,7 @@ public class MainState extends ManagedGameState {
             }
         }
         
-        ArrayList<Entity> walls = (ArrayList<Entity>) em.getEntityGroup(C.Groups.WALLS.name);
+       /* ArrayList<Entity> walls = (ArrayList<Entity>) em.getEntityGroup(C.Groups.WALLS.name);
         Iterator it = walls.iterator();
         while(it.hasNext()) {
             Wall wall = (Wall) it.next();
@@ -198,9 +199,9 @@ public class MainState extends ManagedGameState {
             if(heart.isActive()) {
                 heart.checkCollision(player);
             }
-        }
+        }*/
         
-        if (player.getR().intersects(knight.getR())) {
+        if (player.collideWith(knight)) {
             player.saved();
         } else if (player.collideWithFloor(tileMap)) {
             player.die();

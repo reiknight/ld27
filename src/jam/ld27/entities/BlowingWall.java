@@ -4,6 +4,8 @@
  */
 package jam.ld27.entities;
 
+import jam.ld27.sprites.Player;
+
 /**
  *
  * @author Reik Val
