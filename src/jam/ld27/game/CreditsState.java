@@ -41,9 +41,7 @@ public class CreditsState extends ManagedGameState {
         g.drawString("@ReikVal", 600, 370);
         g.drawString("@ultrayoshi", 600, 390);
         g.drawString("art by", 600, 430);
-        g.drawString("@_Dreisa_", 600, 450);
-        g.drawString("special thanks", 600, 490);
-        g.drawString("Our dog Zeus", 600, 510);
+        g.drawString("@sorayaalb", 600, 450);
         em.render(container, g);
     }
 
