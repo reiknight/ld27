@@ -25,8 +25,8 @@ public class Enemy extends Sprite {
         this.setPosition(new Vector2f(x, y));
         addAnimation("flying_right", new int[]{0,1});
         addAnimation("flying_left", new int[]{3,4});
-        //TODO
-        setAnimation("flying_right");
+        
+        setAnimation("flying_left");
         addBB(new Rectangle(17, 55, 45, 20));
         
         velX = (int) (256 + 100 * new Random().nextFloat());
@@ -46,5 +46,13 @@ public class Enemy extends Sprite {
     
     public void changeDirection() {
         direction *= -1;
+        switch(direction) {
+            case 1:
+                setAnimation("flying_left");
+                break;
+            case -1:
+                setAnimation("flying_right");
+                break;
+        }
     }
 }
