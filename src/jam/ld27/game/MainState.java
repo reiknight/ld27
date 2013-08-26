@@ -30,7 +30,11 @@ public class MainState extends ManagedGameState {
     private Player player;
     private TileMap tileMap;
     private Camera camera;
+    //Generation of enemies and hearts.
     private int nEnemies = 10;
+    private int nHearts = 10;
+    private Random r = new Random();
+    //Animation
     private int contador = 0;
     private Initiator initiator;
     
@@ -196,9 +200,21 @@ public class MainState extends ManagedGameState {
         
         int i;
         for (i = 0; i < nEnemies; i += 1) {
-            float x = new Random().nextFloat() * tileMap.getWidth() - tileMap.getTileSize();
-            float y = new Random().nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
+            float x = r.nextFloat() * tileMap.getWidth() - tileMap.getTileSize();
+            float y = r.nextFloat() * tileMap.getHeight() - tileMap.getTileSize();
             em.addEntity(C.Entities.ENEMY.name + i, new Enemy(x, y));
+        }
+    }
+    
+    private void initHearts() {
+        em.removeEntityGroup(C.Groups.HEARTS.name);
+        em.forceRemoval();
+        
+        for(int i = 0; i < nHearts; i++) {
+            float x = r.nextFloat() * (tileMap.getWidth() - tileMap.getTileSize());
+            float frac = (tileMap.getHeight() - tileMap.getTileSize())/nHearts;
+            float y = r.nextFloat() * frac + i*frac;
+            em.addEntity(C.Entities.HEART.name + i, new Heart(x, y);
         }
     }
     
