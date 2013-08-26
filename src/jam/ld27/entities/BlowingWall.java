@@ -17,7 +17,12 @@ public class BlowingWall extends Wall {
         
         //TODO: ultra hardcoded
         frame = 4;
-        int[][] cb = {{0,1,0},{1,0,1}};
+        int[][] cb = new int[2][25];
+        for(int i = 0; i < cb.length; i++) {
+            for(int j = 0; j < cb[i].length; j++) {
+                cb[i][j] = 1;
+            }
+        }
         collisionBoxes = cb;
     }
 
