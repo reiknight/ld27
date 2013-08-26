@@ -5,14 +5,20 @@ import org.newdawn.slick.Image;
 
 public class TileSet {
     private Image image;
-    private int tileSize;
+    private int tileWidth;
+    private int tileHeight;
     private int width;
     private int height;
     private int cols;
     private int rows;
     
     public TileSet(String name, int tileSize) {
-        this.tileSize = tileSize;
+        this(name, tileSize, tileSize);
+    }
+    
+    public TileSet(String name, int tileWidth, int tileHeight) {
+        this.tileWidth = tileWidth;
+        this.tileHeight = tileHeight;
         this.setTexture(name);
     }
     
@@ -23,8 +29,8 @@ public class TileSet {
         width = image.getWidth();
         height = image.getHeight();
         // Set columns and rows based on tileSize
-        cols = width / tileSize;
-        rows = height / tileSize;
+        cols = width / tileWidth;
+        rows = height / tileHeight;
     }
     
     /**
@@ -73,7 +79,7 @@ public class TileSet {
         i  = id / cols;
         j = id % cols;
         
-        subImage = this.image.getSubImage(j  * tileSize, i  * tileSize, tileSize * n, tileSize * m);
+        subImage = this.image.getSubImage(j  * tileWidth, i  * tileHeight, tileWidth * n, tileHeight * m);
         subImage.draw(x, y);
     }
     
@@ -91,7 +97,7 @@ public class TileSet {
         i  = id / cols;
         j = id % cols;
         
-        subImage = this.image.getSubImage(j  * tileSize, i  * tileSize, tileSize * n, tileSize * m);
+        subImage = this.image.getSubImage(j  * tileWidth, i  * tileHeight, tileWidth * n, tileHeight * m);
         subImage.draw(x, y);
     }
      
