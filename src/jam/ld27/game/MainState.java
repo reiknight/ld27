@@ -86,6 +86,9 @@ public class MainState extends ManagedGameState {
         g.popTransform();
         
         g.drawString("Score: " + player.getScore(), 0, 0);
+        if(contador <= 601) {
+            initiator.render(gc, g);
+        }
     }
 
     @Override
