@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jam.ld27.entities;
+package jam.ld27.sprites;
 
+import jam.ld27.sprites.Sprite;
 import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.EventManager;
 import infinitedog.frisky.sounds.SoundManager;
@@ -110,11 +111,11 @@ public class Player extends Sprite {
         return score;
     }
 
-    double getVelY() {
+    public double getVelY() {
         return velY;
     }
 
-    void setVelY(double vy) {
+    public void setVelY(double vy) {
         velY = vy;
     }
 

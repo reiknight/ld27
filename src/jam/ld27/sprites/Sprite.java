@@ -1,4 +1,4 @@
-package jam.ld27.entities;
+package jam.ld27.sprites;
 
 import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.EventManager;
@@ -12,7 +12,7 @@ import org.newdawn.slick.Graphics;
 
 public class Sprite extends Entity {
     private TileSet tileSet;
-    private int currentFrame;
+    protected int currentFrame;
     private int currentAnimationFrame = 0;
     private String currentAnimation = null;
     private int step;

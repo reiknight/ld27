@@ -4,10 +4,10 @@ import infinitedog.frisky.entities.Entity;
 import infinitedog.frisky.events.InputEvent;
 import infinitedog.frisky.game.ManagedGameState;
 import jam.ld27.entities.Enemy;
-import jam.ld27.entities.Player;
+import jam.ld27.sprites.Player;
 import jam.ld27.entities.Heart;
 import jam.ld27.entities.Initiator;
-import jam.ld27.entities.Knight;
+import jam.ld27.sprites.Knight;
 import jam.ld27.entities.Wall;
 import jam.ld27.tilemap.MapGenerator;
 import jam.ld27.tilemap.TileMap;
@@ -104,7 +104,7 @@ public class MainState extends ManagedGameState {
             evm.update(gc, delta);
             camera.update(gc, delta);
 
-            checkEnemiesCollision(gc, game);
+            //checkEnemiesCollision(gc, game);
             checkPlayerCollision(gc, game);
 
             if (player.isDead() || player.isSaved()) {
@@ -182,7 +182,7 @@ public class MainState extends ManagedGameState {
             }
         }
         
-        ArrayList<Entity> walls = (ArrayList<Entity>) em.getEntityGroup(C.Groups.WALLS.name);
+       /* ArrayList<Entity> walls = (ArrayList<Entity>) em.getEntityGroup(C.Groups.WALLS.name);
         Iterator it = walls.iterator();
         while(it.hasNext()) {
             Wall wall = (Wall) it.next();
@@ -199,7 +199,7 @@ public class MainState extends ManagedGameState {
             if(heart.isActive()) {
                 heart.checkCollision(player);
             }
-        }
+        }*/
         
         if (player.getR().intersects(knight.getR())) {
             player.saved();
