@@ -15,6 +15,7 @@ import jam.ld27.tilemap.TileMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -104,6 +105,7 @@ public class MainState extends ManagedGameState {
         em.render(gc, g);
         g.popTransform();
         
+        g.setColor(Color.black);
         g.drawString("Score: " + player.getScore(), 0, 0);
         if(contador <= 601) {
             initiator.render(gc, g);

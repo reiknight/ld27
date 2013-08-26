@@ -85,6 +85,7 @@ public class Player extends Sprite {
         modX = 0;
         //Setting the character:
         this.setPosition(new Vector2f(x,y));
+        
         if(crying == 0) {
             setAnimation("crying");
             crying++;
