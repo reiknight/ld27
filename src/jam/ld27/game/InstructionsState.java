@@ -46,8 +46,8 @@ public class InstructionsState extends ManagedGameState {
         g.drawString("Whatch out! Your knight is waiting for you at bottom.", 100, 169);
         g.drawString("Try to be catched by his hands for win the game.", 100, 184);
         g.drawString("Take the hearts that your warrior is sending you for improve your score.", 100, 199);
-        
-        g.drawString("Arrow Right | Arrow Left: Movement", 100, 300);
+        g.drawString("And take care of stormy clouds and evil birds!",100, 214);
+        g.drawString("Arrow Right | Arrow Left: Movement", 100, 350);
         
         em.render(container, g);
     }
