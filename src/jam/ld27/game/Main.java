@@ -15,6 +15,7 @@ public class Main extends StateBasedGame {
         this.addState(new CreditsState(C.States.CREDITS_STATE.value));
         this.addState(new InstructionsState(C.States.INSTRUCTIONS_STATE.value));
         this.addState(new GameOverState(C.States.GAME_OVER_STATE.value));
+        this.addState(new StoryState(C.States.STORY_STATE.value));
         
         this.enterState(C.States.START_STATE.value);
     }
@@ -37,5 +38,6 @@ public class Main extends StateBasedGame {
         this.getState(C.States.CREDITS_STATE.value).init(gc, this);
         this.getState(C.States.INSTRUCTIONS_STATE.value).init(gc, this);
         this.getState(C.States.GAME_OVER_STATE.value).init(gc, this);
+        this.getState(C.States.STORY_STATE.value).init(gc, this);
     }
 }

@@ -31,15 +31,17 @@ public class C {
 
     public static enum Textures {
         START_BACKGROUND("start_background", "resources/textures/start_background.png"),
+        STORY_BACKGROUND("story_background", "resources/textures/story_background.png"),
         ZOMBIE("zombie", "resources/textures/zombie.png"),
         AVATAR("avatar", "resources/textures/zombie_0.png"),
-        BUTTON_CREDITS("button_credits", "resources/textures/button_credits.png"),
-        BUTTON_PLAY("button_play", "resources/textures/button_play.png"),
-        BUTTON_INSTRUCTIONS("button_instructions", "resources/textures/button_instructions.png"),
-        BUTTON_EASY("button_easy", "resources/textures/button_easy.png"),
-        BUTTON_NORMAL("button_normal", "resources/textures/button_normal.png"),
-        BUTTON_HARD("button_hard", "resources/textures/button_hard.png"),
-        CROSSHAIR("crosshair", "resources/textures/crosshair.png"),
+        BUTTON_CREDITS("button_credits", "resources/textures/creditsboton.png"),
+        BUTTON_PLAY("button_play", "resources/textures/playboton.png"),
+        BUTTON_INSTRUCTIONS("button_instructions", "resources/textures/instructionsboton.png"),
+        BUTTON_EASY("button_easy", "resources/textures/easyboton.png"),
+        BUTTON_STORY("button_story", "resources/textures/storyboton.png"),
+        BUTTON_NORMAL("button_normal", "resources/textures/normalboton.png"),
+        BUTTON_HARD("button_hard", "resources/textures/hardboton.png"),
+        CROSSHAIR("crosshair", "resources/textures/puntero.png"),
         WALL("wall", "resources/textures/wall.png"),
         TILE_SET("tile_set", "resources/textures/tile_set.png"),
         KNIGHT_SET("knight_set", "resources/textures/knight_set.png"),
@@ -51,6 +53,7 @@ public class C {
         LOGO("logo", "resources/textures/logo.png"),
         ENEMY("enemy", "resources/textures/birds.png"),
         CASTLE("castle", "resources/textures/castillo.png"),
+        STORY("story", "resources/textures/storyboton.png"),
         HEART("heart", "resources/textures/hearts.png");
 
         public String name;
@@ -117,6 +120,7 @@ public class C {
         PUBLISHER_STATE("publisher", 2),
         INSTRUCTIONS_STATE("instructions", 3),
         GAME_OVER_STATE("game_over", 4),
+        STORY_STATE("story", 5),
         CREDITS_STATE("credits", 9);
 
         public String name;
@@ -145,12 +149,13 @@ public class C {
     }
 
      public static enum Buttons {
-        CREDITS(Textures.BUTTON_CREDITS.name, "", new Vector2f(150, 450), new Vector2f(45, 25)),
-        START_GAME(Textures.BUTTON_PLAY.name, "", new Vector2f(340, 450), new Vector2f(45, 25)),
-        INSTRUCTIONS(Textures.BUTTON_INSTRUCTIONS.name, "", new Vector2f(550, 450), new Vector2f(45, 25)),
-        EASY(Textures.BUTTON_EASY.name, "", new Vector2f(150, 450), new Vector2f(45, 25)),
-        NORMAL(Textures.BUTTON_NORMAL.name, "", new Vector2f(340, 450), new Vector2f(45, 25)),
-        HARD(Textures.BUTTON_HARD.name, "", new Vector2f(550, 450), new Vector2f(45, 25));
+        START_GAME(Textures.BUTTON_PLAY.name, "", new Vector2f(500, 100), new Vector2f(45, 25)),
+        STORY(Textures.STORY.name, "", new Vector2f(500, 200), new Vector2f(45, 25)),
+        INSTRUCTIONS(Textures.BUTTON_INSTRUCTIONS.name, "", new Vector2f(500, 300), new Vector2f(45, 25)),
+        CREDITS(Textures.BUTTON_CREDITS.name, "", new Vector2f(500, 400), new Vector2f(45, 25)),
+        EASY(Textures.BUTTON_EASY.name, "", new Vector2f(500, 100), new Vector2f(45, 25)),
+        NORMAL(Textures.BUTTON_NORMAL.name, "", new Vector2f(500, 200), new Vector2f(45, 25)),
+        HARD(Textures.BUTTON_HARD.name, "", new Vector2f(500, 300), new Vector2f(45, 25));
 
         public String textureName;
         public String label;
