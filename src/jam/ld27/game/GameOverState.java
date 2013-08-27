@@ -6,6 +6,7 @@ import jam.ld27.game.C;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -17,7 +18,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * @author InfiniteDog
  */
 public class GameOverState extends ManagedGameState {
-    private int score;
+    private int score = 0;
+    private Image background;
     
     public GameOverState(int stateID) {
         super(stateID);
@@ -28,14 +30,18 @@ public class GameOverState extends ManagedGameState {
         em.setGameState(C.States.GAME_OVER_STATE.name);
         evm.addEvent(C.Events.BACK.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_SPACE, (Integer) C.Logic.SELECT_OPTION_DELAY.data));
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
+        
+        tm.addTexture(C.Textures.GAME_OVER_BACKGROUND.name, C.Textures.GAME_OVER_BACKGROUND.path);
+        background = tm.getTexture(C.Textures.GAME_OVER_BACKGROUND.name);
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         em.setGameState(C.States.GAME_OVER_STATE.name);
-        g.setColor(Color.white);
-        g.drawString("press <SPACE> to back", 530, 50);
-        g.drawString("Score: " + score, 0, 0);
+        background.draw(0,0);
+        g.setColor(Color.black);
+        g.drawString("press <SPACE> to back", 300, 50);
+        g.drawString("Score: " + score, 320, 100);
         em.render(container, g);
     }
 
