@@ -6,6 +6,7 @@ import jam.ld27.game.C;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -17,7 +18,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * @author InfiniteDog
  */
 public class CreditsState extends ManagedGameState {
-    
+    private Image background;
+
     public CreditsState(int stateID) {
         super(stateID);
     }
@@ -29,19 +31,14 @@ public class CreditsState extends ManagedGameState {
         evm.addEvent(C.Events.CLOSE_WINDOW.name, new InputEvent(InputEvent.KEYBOARD, Input.KEY_ESCAPE));
         
         //TODO
-        tm.addTexture(C.Textures.START_BACKGROUND.name, C.Textures.START_BACKGROUND.path);
+        tm.addTexture(C.Textures.CREDITS_BACKGROUND.name, C.Textures.CREDITS_BACKGROUND.path);
+        background = tm.getTexture(C.Textures.CREDITS_BACKGROUND.name);
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         em.setGameState(C.States.CREDITS_STATE.name);
-        g.setColor(Color.white);
-        g.drawString("press <SPACE> to back", 530, 50);
-        g.drawString("programmed by", 600, 350);
-        g.drawString("@ReikVal", 600, 370);
-        g.drawString("@ultrayoshi", 600, 390);
-        g.drawString("art by", 600, 430);
-        g.drawString("@sorayaalb", 600, 450);
+        background.draw(0,0);
         em.render(container, g);
     }
 

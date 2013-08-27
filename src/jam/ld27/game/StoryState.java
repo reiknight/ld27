@@ -40,8 +40,6 @@ public class StoryState extends ManagedGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         em.setGameState(C.States.STORY_STATE.name);
         background.draw(0, 0);
-        g.setColor(Color.black);
-        g.drawString("press <SPACE> to back", 530, 50);
         em.render(container, g);
     }
 
