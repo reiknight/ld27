@@ -33,6 +33,8 @@ public class C {
         START_BACKGROUND("start_background", "resources/textures/start_background.png"),
         STORY_BACKGROUND("story_background", "resources/textures/story_background.png"),
         CREDITS_BACKGROUND("credits_background", "resources/textures/credits_background.png"),
+        INSTRUCTIONS_BACKGROUND("instructions_background", "resources/textures/instructions_background.png"),
+        GAME_OVER_BACKGROUND("game_over_background", "resources/textures/game_over_background.png"),
         ZOMBIE("zombie", "resources/textures/zombie.png"),
         AVATAR("avatar", "resources/textures/zombie_0.png"),
         BUTTON_CREDITS("button_credits", "resources/textures/creditsboton.png"),
